@@ -1,0 +1,2426 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Azel Belkadi — Porteur de projet · District One D1</title>
+<meta name="description" content="Point 6 — Porteur de projet. Architecture détaillée du parcours, patrimoine et engagement personnel sur l'opération District One.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter+Tight:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap');
+
+*{box-sizing:border-box;margin:0;padding:0;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+html{scroll-behavior:smooth;font-size:15.5px}
+
+:root{
+  --ink:#0f0f0d;
+  --ink-soft:#1c1c1a;
+  --ink-muted:#6a6a62;
+  --ink-faint:#a8a89e;
+  --ink-line:#e5e2d8;
+  --paper:#f7f4ec;
+  --paper-warm:#fbf8f1;
+  --cream:#fdfbf5;
+  --white:#ffffff;
+  --gold:#a8832e;
+  --gold-bright:#c9a961;
+  --gold-pale:#f3ead2;
+  --gold-ink:#6a4f18;
+  --green:#2a5a3f;
+  --red:#a33030;
+  --shadow-sm:0 1px 2px rgba(15,15,13,.04), 0 2px 8px rgba(15,15,13,.04);
+  --shadow-md:0 4px 20px rgba(15,15,13,.08);
+  --serif:'Cormorant Garamond', Georgia, serif;
+  --sans:'Inter Tight', -apple-system, sans-serif;
+  --mono:'JetBrains Mono', monospace;
+}
+
+body{
+  font-family:var(--sans);
+  background:var(--paper);
+  color:var(--ink);
+  line-height:1.6;
+  font-weight:400;
+  font-feature-settings:"ss01","kern";
+  overflow-x:hidden;
+}
+
+::selection{background:var(--gold);color:#fff}
+
+/* ═══════════════════════════════════════════════
+   NAVIGATION
+   ═══════════════════════════════════════════════ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(247,244,236,.88);
+  backdrop-filter:blur(16px) saturate(180%);
+  -webkit-backdrop-filter:blur(16px) saturate(180%);
+  border-bottom:1px solid rgba(15,15,13,.06);
+  padding:14px 40px;
+  display:flex;justify-content:space-between;align-items:center;
+  transition:all .3s ease;
+}
+.nav-brand{
+  font-family:var(--serif);
+  font-size:17px;font-weight:500;
+  color:var(--ink);letter-spacing:.01em;
+  display:flex;align-items:center;gap:12px;
+}
+.nav-brand::before{
+  content:'';display:inline-block;width:6px;height:6px;
+  background:var(--gold);border-radius:50%;
+}
+.nav-links{display:flex;gap:32px}
+.nav-links a{
+  font-size:11.5px;color:var(--ink-muted);text-decoration:none;
+  letter-spacing:.12em;text-transform:uppercase;font-weight:500;
+  transition:color .2s;position:relative;padding:4px 0;
+}
+.nav-links a::after{
+  content:'';position:absolute;left:0;right:0;bottom:0;height:1px;
+  background:var(--gold);transform:scaleX(0);transform-origin:left;
+  transition:transform .3s ease;
+}
+.nav-links a:hover{color:var(--ink)}
+.nav-links a:hover::after{transform:scaleX(1)}
+.nav-conf{
+  font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink-muted);
+  border:1px solid var(--ink-line);padding:5px 11px;
+  background:var(--cream);
+}
+
+/* ═══════════════════════════════════════════════
+   HERO — éditorial, dense, calme
+   ═══════════════════════════════════════════════ */
+.hero{
+  min-height:100vh;
+  background:var(--ink);
+  color:#fff;
+  padding:120px 40px 80px;
+  position:relative;
+  overflow:hidden;
+}
+
+/* Grain texture overlay */
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.08 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity:.5;pointer-events:none;
+}
+
+/* Gold accent circle */
+.hero::after{
+  content:'';position:absolute;right:-200px;top:50%;transform:translateY(-50%);
+  width:700px;height:700px;border-radius:50%;
+  background:radial-gradient(circle at center, rgba(200,169,97,.08), transparent 70%);
+  pointer-events:none;
+}
+
+.hero-container{
+  max-width:1280px;margin:0 auto;position:relative;z-index:2;
+  display:grid;grid-template-columns:1fr 340px 1fr;gap:56px;align-items:center;
+  min-height:calc(100vh - 200px);
+}
+
+.hero-left{opacity:1;animation:fadeInUp .9s cubic-bezier(.22,1,.36,1) .1s both}
+
+/* PORTRAIT — centre, traitement luxury editorial */
+.hero-portrait-wrap{
+  opacity:1;animation:fadeInUp 1.2s cubic-bezier(.22,1,.36,1) .3s both;
+  position:relative;
+  display:flex;justify-content:center;align-items:center;
+}
+.hero-portrait-frame{
+  position:relative;
+  width:300px;height:380px;
+}
+/* Decorative gold frame offset — both corners */
+.hero-portrait-frame::before{
+  content:'';position:absolute;
+  top:14px;left:14px;right:-14px;bottom:-14px;
+  border:1px solid rgba(200,169,97,.28);
+  pointer-events:none;
+  transition:all .6s cubic-bezier(.22,1,.36,1);
+}
+.hero-portrait-frame:hover::before{
+  top:18px;left:18px;right:-18px;bottom:-18px;
+  border-color:rgba(200,169,97,.45);
+}
+/* Subtle glow around portrait */
+.hero-portrait-frame::after{
+  content:'';position:absolute;inset:-40px;
+  background:radial-gradient(circle at center, rgba(200,169,97,.08), transparent 65%);
+  pointer-events:none;z-index:0;
+}
+.hero-portrait-img{
+  position:relative;z-index:2;
+  width:100%;height:100%;
+  object-fit:cover;object-position:center 18%;
+  filter:grayscale(4%) contrast(1.04);
+  display:block;
+  box-shadow:0 20px 60px -20px rgba(0,0,0,.5);
+}
+/* Subtle gradient overlay */
+.hero-portrait-overlay{
+  position:absolute;inset:0;z-index:3;pointer-events:none;
+  background:
+    linear-gradient(to bottom, transparent 70%, rgba(15,15,13,.3)),
+    linear-gradient(135deg, rgba(200,169,97,.03), transparent 50%);
+}
+/* Caption under portrait */
+.hero-portrait-caption{
+  position:absolute;bottom:-52px;left:-14px;right:14px;
+  text-align:center;
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--gold-bright);font-weight:500;
+  opacity:.85;z-index:4;
+}
+.hero-portrait-caption span{
+  display:inline-block;padding:0 14px;
+  background:var(--ink);position:relative;z-index:2;
+}
+.hero-portrait-caption::before{
+  content:'';position:absolute;left:18%;right:18%;top:50%;height:1px;
+  background:rgba(200,169,97,.25);z-index:1;
+}
+
+.hero-eyebrow{
+  font-family:var(--mono);font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--gold-bright);
+  margin-bottom:40px;display:flex;align-items:center;gap:14px;
+}
+.hero-eyebrow::before{
+  content:'';width:24px;height:1px;background:var(--gold);
+}
+
+.hero-name{
+  font-family:var(--serif);font-weight:300;
+  font-size:80px;line-height:.95;
+  color:#fff;margin-bottom:28px;
+  letter-spacing:-.02em;
+}
+.hero-name em{
+  font-style:italic;font-weight:400;
+  color:var(--gold-bright);display:block;
+}
+
+.hero-tagline{
+  font-family:var(--serif);font-style:italic;
+  font-size:22px;font-weight:300;line-height:1.5;
+  color:rgba(255,255,255,.75);
+  max-width:460px;margin-bottom:40px;
+}
+
+.hero-intro{
+  font-size:14.5px;color:rgba(255,255,255,.55);font-weight:300;
+  line-height:1.8;max-width:440px;
+  border-left:1px solid rgba(200,169,97,.4);padding-left:22px;
+}
+
+.hero-right{
+  opacity:1;animation:fadeInUp .9s cubic-bezier(.22,1,.36,1) .4s both;
+  display:flex;flex-direction:column;gap:18px;
+}
+
+.hero-stat{
+  border-top:1px solid rgba(255,255,255,.08);
+  padding:22px 0;
+  display:flex;flex-direction:column;gap:8px;
+}
+.hero-stat:last-child{border-bottom:1px solid rgba(255,255,255,.08)}
+.hero-stat-num{
+  font-family:var(--serif);
+  font-size:54px;font-weight:300;line-height:1;
+  color:#fff;letter-spacing:-.02em;
+}
+.hero-stat-num em{
+  font-style:normal;color:var(--gold-bright);font-size:.45em;
+  display:inline-block;margin-left:6px;font-weight:400;
+}
+.hero-stat-meta{
+  display:flex;flex-direction:column;gap:4px;
+}
+.hero-stat-lbl{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--gold-bright);font-weight:500;
+}
+.hero-stat-desc{
+  font-size:12px;color:rgba(255,255,255,.5);font-weight:300;
+  line-height:1.55;
+}
+
+/* Signature block */
+.hero-signature{
+  margin-top:40px;padding-top:28px;
+  border-top:1px solid rgba(255,255,255,.08);
+  display:flex;justify-content:space-between;align-items:flex-end;
+  font-size:11px;color:rgba(255,255,255,.4);
+  font-family:var(--mono);letter-spacing:.08em;text-transform:uppercase;
+}
+.hero-signature-left{line-height:1.8}
+.hero-signature .loc{color:var(--gold-bright)}
+.hero-signature-right{text-align:right;line-height:1.8}
+
+/* ═══════════════════════════════════════════════
+   EXECUTIVE SUMMARY — TLDR en haut de page
+   ═══════════════════════════════════════════════ */
+.exec-summary{
+  background:var(--ink);
+  color:#fff;
+  padding:56px 40px 60px;
+  border-top:3px solid var(--gold);
+}
+.exec-inner{max-width:1100px;margin:0 auto}
+.exec-eyebrow{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--gold-bright);font-weight:500;
+  margin-bottom:20px;display:inline-block;
+  padding:5px 12px;border:1px solid var(--gold);border-radius:2px;
+}
+.exec-title{
+  font-family:var(--serif);font-size:32px;font-weight:300;
+  color:#fff;line-height:1.2;letter-spacing:-.015em;
+  margin-bottom:32px;max-width:900px;
+}
+.exec-title em{color:var(--gold-bright);font-style:italic}
+.exec-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:0;
+  border-top:1px solid rgba(255,255,255,.12);
+  padding-top:28px;
+}
+.exec-cell{
+  padding:0 28px;
+  border-right:1px solid rgba(255,255,255,.08);
+}
+.exec-cell:first-child{padding-left:0}
+.exec-cell:last-child{border-right:none;padding-right:0}
+.exec-cell-lbl{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--gold-bright);font-weight:500;
+  margin-bottom:10px;
+}
+.exec-cell-val{
+  font-family:var(--serif);font-size:22px;font-weight:400;
+  color:#fff;line-height:1.25;letter-spacing:-.01em;
+}
+.exec-cell-val strong{color:var(--gold-bright);font-weight:500}
+
+/* ═══════════════════════════════════════════════
+   MANIFESTO — transition entre hero et parcours
+   ═══════════════════════════════════════════════ */
+.manifesto{
+  background:var(--paper-warm);
+  padding:120px 40px 140px;
+  position:relative;
+  border-bottom:1px solid var(--ink-line);
+}
+.manif-inner{max-width:1100px;margin:0 auto;position:relative}
+
+.manif-eyebrow{
+  display:flex;align-items:center;gap:14px;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--gold);font-weight:500;
+  margin-bottom:28px;
+}
+.manif-eyebrow .manif-mark{color:var(--gold);font-weight:400;letter-spacing:0}
+
+.manif-title{
+  font-family:var(--serif);font-weight:300;
+  font-size:56px;line-height:1.05;color:var(--ink);
+  letter-spacing:-.02em;margin-bottom:72px;
+  max-width:900px;
+}
+.manif-title em{font-style:italic;color:var(--gold-ink)}
+.manif-title .manif-line{display:block}
+
+.manif-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:0;
+  margin-bottom:80px;
+}
+.manif-point{
+  padding:0 40px;
+  border-right:1px solid var(--ink-line);
+  position:relative;
+}
+.manif-point:first-child{padding-left:0}
+.manif-point:last-child{border-right:none;padding-right:0}
+
+.manif-point-num{
+  font-family:var(--serif);font-style:italic;font-weight:400;
+  font-size:44px;line-height:1;color:var(--gold);
+  letter-spacing:-.02em;margin-bottom:24px;
+}
+
+.manif-point-head{
+  font-family:var(--serif);font-size:22px;font-weight:500;
+  color:var(--ink);line-height:1.3;margin-bottom:14px;
+  letter-spacing:-.005em;
+}
+
+.manif-point-text{
+  font-size:14px;color:var(--ink-soft);font-weight:400;
+  line-height:1.75;
+}
+
+.manif-conviction{
+  background:var(--ink);color:#fff;
+  padding:48px 56px;position:relative;overflow:hidden;
+}
+.manif-conviction::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(to right, var(--gold), var(--gold-bright), var(--gold));
+}
+.manif-conviction::after{
+  content:'';position:absolute;right:-120px;bottom:-120px;
+  width:400px;height:400px;border-radius:50%;
+  background:radial-gradient(circle at center, rgba(200,169,97,.08), transparent 65%);
+  pointer-events:none;
+}
+.manif-conv-eyebrow{
+  font-family:var(--mono);font-size:10px;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--gold-bright);font-weight:500;
+  margin-bottom:20px;
+}
+.manif-conv-text{
+  font-family:var(--serif);font-size:32px;font-weight:300;
+  line-height:1.35;color:#fff;margin-bottom:20px;
+  letter-spacing:-.005em;max-width:780px;
+  position:relative;z-index:2;
+}
+.manif-conv-text em{font-style:italic;color:var(--gold-bright);font-weight:400}
+.manif-conv-sub{
+  font-size:14px;color:rgba(255,255,255,.6);font-weight:300;
+  line-height:1.75;max-width:720px;position:relative;z-index:2;
+}
+
+/* ═══════════════════════════════════════════════
+   SECTION GENERIC
+   ═══════════════════════════════════════════════ */
+section{
+  padding:120px 40px;
+  position:relative;
+}
+
+.container{max-width:1200px;margin:0 auto}
+
+.section-head{
+  display:grid;grid-template-columns:auto 1fr;gap:80px;align-items:end;
+  margin-bottom:72px;padding-bottom:32px;
+  border-bottom:1px solid var(--ink-line);
+}
+.section-num{
+  font-family:var(--serif);font-style:italic;font-weight:300;
+  font-size:80px;line-height:1;color:var(--gold);
+  letter-spacing:-.02em;
+}
+.section-meta{display:flex;flex-direction:column;gap:16px}
+.section-eyebrow{
+  font-family:var(--mono);font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--gold);font-weight:500;
+}
+.section-title{
+  font-family:var(--serif);font-size:48px;font-weight:300;
+  color:var(--ink);line-height:1.1;letter-spacing:-.01em;
+}
+.section-title em{font-style:italic;color:var(--gold)}
+.section-desc{
+  font-size:14.5px;color:var(--ink-muted);font-weight:400;
+  max-width:680px;line-height:1.75;margin-top:8px;
+}
+
+/* ═══════════════════════════════════════════════
+   TIMELINE / PARCOURS — verticale élégante
+   ═══════════════════════════════════════════════ */
+.timeline-wrap{
+  position:relative;
+  display:grid;grid-template-columns:1fr 60px 1fr;
+  gap:0;
+}
+.timeline-spine{
+  grid-column:2;
+  position:relative;
+  display:flex;justify-content:center;
+}
+.timeline-spine::before{
+  content:'';position:absolute;top:0;bottom:0;left:50%;
+  width:1px;background:linear-gradient(to bottom, transparent, var(--ink-line) 5%, var(--ink-line) 95%, transparent);
+}
+
+.tl-entry{
+  display:contents;
+}
+.tl-node{
+  grid-column:2;
+  position:relative;
+  display:flex;justify-content:center;align-items:flex-start;
+  padding-top:18px;
+}
+.tl-node-dot{
+  width:11px;height:11px;border-radius:50%;
+  background:var(--paper);border:2px solid var(--gold);
+  z-index:2;position:relative;
+  transition:all .3s ease;
+}
+.tl-entry:hover .tl-node-dot{
+  background:var(--gold);transform:scale(1.3);
+}
+
+.tl-card{
+  padding:14px 0 48px;
+}
+.tl-card.left{grid-column:1;text-align:right;padding-right:40px}
+.tl-card.right{grid-column:3;text-align:left;padding-left:40px}
+
+.tl-year{
+  font-family:var(--serif);font-size:28px;font-weight:400;
+  font-style:italic;color:var(--gold);
+  line-height:1;margin-bottom:6px;letter-spacing:-.01em;
+}
+.tl-role{
+  font-family:var(--serif);font-size:22px;font-weight:400;
+  color:var(--ink);line-height:1.2;margin-bottom:4px;
+}
+.tl-company{
+  font-family:var(--mono);font-size:11px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink-muted);
+  margin-bottom:14px;
+}
+.tl-desc{
+  font-size:13.5px;color:var(--ink-muted);font-weight:400;
+  line-height:1.7;max-width:360px;
+}
+.tl-card.right .tl-desc{margin-right:auto}
+.tl-card.left .tl-desc{margin-left:auto}
+
+.tl-tag{
+  display:inline-block;font-family:var(--mono);
+  font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--gold-ink);background:var(--gold-pale);
+  padding:4px 10px;margin-top:14px;
+}
+
+/* ═══════════════════════════════════════════════
+   TRACK RECORD — deal sheets
+   ═══════════════════════════════════════════════ */
+.deals-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:24px;
+}
+
+.deal{
+  background:var(--white);
+  border:1px solid var(--ink-line);
+  padding:0;overflow:hidden;position:relative;
+  transition:all .4s cubic-bezier(.22,1,.36,1);
+}
+.deal:hover{
+  box-shadow:var(--shadow-md);transform:translateY(-2px);
+  border-color:var(--gold);
+}
+
+.deal-header{
+  padding:26px 32px 20px;
+  border-bottom:1px solid var(--ink-line);
+  background:var(--cream);
+  display:flex;justify-content:space-between;align-items:flex-start;
+}
+.deal-status{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--green);font-weight:500;
+  display:flex;align-items:center;gap:6px;
+}
+.deal-status::before{
+  content:'';width:6px;height:6px;border-radius:50%;background:var(--green);
+}
+.deal-period{
+  font-family:var(--mono);font-size:10px;letter-spacing:.08em;
+  color:var(--ink-muted);
+}
+
+.deal-body{padding:28px 32px}
+.deal-title{
+  font-family:var(--serif);font-size:26px;font-weight:400;
+  color:var(--ink);line-height:1.15;margin-bottom:4px;
+}
+.deal-loc{
+  font-size:12.5px;color:var(--ink-muted);font-weight:300;
+  margin-bottom:24px;letter-spacing:.01em;
+}
+
+.deal-metrics{
+  display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;
+  border-top:1px solid var(--ink-line);
+  border-bottom:1px solid var(--ink-line);
+  padding:22px 0;margin-bottom:22px;
+}
+.deal-metric{
+  padding:0 20px;
+  border-right:1px solid var(--ink-line);
+}
+.deal-metric:first-child{padding-left:0}
+.deal-metric:last-child{border-right:none;padding-right:0}
+.deal-metric-val{
+  font-family:var(--serif);font-size:28px;font-weight:400;
+  color:var(--ink);line-height:1;letter-spacing:-.01em;
+  margin-bottom:6px;
+}
+.deal-metric-val.accent{color:var(--gold-ink)}
+.deal-metric-lbl{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink-muted);
+}
+
+.deal-facts{list-style:none;display:flex;flex-direction:column;gap:9px}
+.deal-facts li{
+  font-size:13px;color:var(--ink-soft);font-weight:400;
+  padding-left:16px;position:relative;line-height:1.55;
+}
+.deal-facts li::before{
+  content:'';position:absolute;left:0;top:10px;
+  width:6px;height:1px;background:var(--gold);
+}
+
+/* ═══════════════════════════════════════════════
+   PATRIMOINE — dashboard consolidé
+   ═══════════════════════════════════════════════ */
+.pat-dashboard{margin-bottom:32px}
+
+.pat-hero-metrics{
+  background:var(--ink);color:#fff;
+  padding:56px 48px;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:0;
+  position:relative;overflow:hidden;
+  margin-bottom:48px;
+}
+.pat-hero-metrics::before{
+  content:'';position:absolute;top:0;right:0;width:400px;height:100%;
+  background:radial-gradient(ellipse at top right, rgba(200,169,97,.12), transparent 70%);
+  pointer-events:none;
+}
+.pat-hero-metric{
+  padding:0 40px;
+  border-right:1px solid rgba(255,255,255,.1);
+  position:relative;z-index:2;
+}
+.pat-hero-metric:first-child{padding-left:0}
+.pat-hero-metric:last-child{border-right:none;padding-right:0}
+.phm-eyebrow{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--gold-bright);font-weight:500;
+  margin-bottom:14px;
+}
+.phm-val{
+  font-family:var(--serif);font-size:52px;font-weight:300;
+  color:#fff;line-height:1;letter-spacing:-.02em;
+  margin-bottom:8px;
+}
+.phm-desc{
+  font-size:12px;color:rgba(255,255,255,.45);font-weight:300;
+  line-height:1.5;
+}
+
+/* 2 cards SCI */
+.sci-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:48px}
+.sci-card{
+  background:var(--white);border:1px solid var(--ink-line);
+  padding:36px 40px;position:relative;
+}
+.sci-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:var(--gold);
+}
+.sci-badge{
+  font-family:var(--mono);font-size:10px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--gold-ink);
+  background:var(--gold-pale);padding:4px 11px;
+  display:inline-block;margin-bottom:18px;
+}
+.sci-title{
+  font-family:var(--serif);font-size:24px;font-weight:400;
+  color:var(--ink);margin-bottom:4px;line-height:1.2;
+}
+.sci-subtitle{
+  font-size:12.5px;color:var(--ink-muted);
+  margin-bottom:24px;font-weight:300;
+}
+
+.tenant-row{
+  display:flex;align-items:baseline;justify-content:space-between;
+  gap:16px;padding:14px 0;
+  border-bottom:1px solid var(--ink-line);
+}
+.tenant-row:last-of-type{border-bottom:none}
+.tenant-info{display:flex;flex-direction:column;gap:2px;flex:1;min-width:0}
+.tenant-name{
+  font-size:14px;color:var(--ink);font-weight:500;
+  letter-spacing:-.005em;
+}
+.tenant-status{
+  font-size:11px;color:var(--ink-muted);font-weight:400;
+  letter-spacing:.01em;
+}
+.tenant-loyer{
+  font-family:var(--serif);font-size:18px;
+  color:var(--ink);font-weight:500;letter-spacing:-.01em;
+  white-space:nowrap;flex-shrink:0;
+}
+.tenant-loyer em{color:var(--gold-ink);font-style:normal}
+
+.sci-footer{
+  display:flex;justify-content:space-between;align-items:baseline;
+  padding-top:20px;margin-top:12px;
+  border-top:2px solid var(--ink);
+}
+.sci-footer-lbl{
+  font-family:var(--mono);font-size:10px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--ink-muted);
+}
+.sci-footer-val{
+  font-family:var(--serif);font-size:26px;font-weight:500;
+  color:var(--gold-ink);letter-spacing:-.01em;
+}
+
+.sci-note{
+  font-size:12px;color:var(--ink-muted);font-weight:300;line-height:1.6;
+  border-top:1px dashed var(--ink-line);
+  border-bottom:1px dashed var(--ink-line);
+  padding:12px 0;margin:16px 0;
+  font-style:italic;
+}
+
+/* Chart bar visualisation */
+.revenue-viz{
+  background:var(--cream);border:1px solid var(--ink-line);
+  padding:40px 48px;
+}
+.viz-title{
+  font-family:var(--serif);font-size:22px;font-weight:400;
+  color:var(--ink);margin-bottom:8px;
+}
+.viz-sub{
+  font-size:13px;color:var(--ink-muted);margin-bottom:32px;font-weight:300;
+}
+.viz-row{
+  display:grid;grid-template-columns:180px 1fr 110px;gap:20px;
+  align-items:center;padding:10px 0;
+}
+.viz-label{
+  font-size:13px;color:var(--ink);font-weight:500;
+}
+.viz-bar-wrap{
+  position:relative;height:28px;background:rgba(15,15,13,.04);
+  border-radius:2px;overflow:hidden;
+}
+.viz-bar{
+  height:100%;background:linear-gradient(to right, var(--gold), var(--gold-bright));
+  border-radius:2px;
+  transform-origin:left;transform:scaleX(1);
+  transition:transform 1.2s cubic-bezier(.22,1,.36,1);
+}
+.viz-bar[data-width="100"]{width:100%}
+.viz-bar[data-width="54"]{width:54%}
+.viz-bar[data-width="46"]{width:46%}
+.viz-bar[data-width="40"]{width:40%}
+.viz-bar[data-width="38"]{width:38%}
+.viz-bar[data-width="30"]{width:30%}
+.viz-bar[data-width="25"]{width:25%}
+.viz-bar.reinaudo{background:linear-gradient(to right, var(--ink-soft), #3a3a32)}
+.viz-bar.le1{background:linear-gradient(to right, var(--gold-ink), var(--gold))}
+.viz-value{
+  font-family:var(--serif);font-size:17px;font-weight:500;
+  color:var(--ink);text-align:right;letter-spacing:-.01em;
+}
+
+/* ═══════════════════════════════════════════════
+   PLAYBOOK — transformation SCI visuelle
+   ═══════════════════════════════════════════════ */
+.playbook-block{
+  background:var(--white);
+  border:1px solid var(--ink-line);
+  padding:48px 56px;
+  margin-top:40px;position:relative;
+}
+.playbook-block::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(to right, var(--gold), var(--gold-bright), var(--gold));
+}
+.playbook-head{
+  display:flex;flex-direction:column;gap:6px;
+  margin-bottom:40px;padding-bottom:28px;
+  border-bottom:1px solid var(--ink-line);
+}
+.playbook-eyebrow{
+  font-family:var(--mono);font-size:10px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--gold);font-weight:500;
+}
+.playbook-title{
+  font-family:var(--serif);font-size:28px;font-weight:400;
+  color:var(--ink);line-height:1.2;letter-spacing:-.005em;
+}
+.playbook-title em{font-style:italic;color:var(--gold-ink)}
+.playbook-sub{
+  font-size:13px;color:var(--ink-muted);font-weight:300;
+  line-height:1.7;margin-top:8px;max-width:720px;
+}
+
+.playbook-steps{
+  display:grid;grid-template-columns:repeat(4, 1fr);gap:0;
+  position:relative;
+}
+/* Connecting line between steps */
+.playbook-steps::before{
+  content:'';position:absolute;
+  top:48px;left:10%;right:10%;height:1px;
+  background:linear-gradient(to right, var(--ink-line), var(--gold), var(--ink-line));
+  z-index:0;
+}
+
+.playbook-step{
+  position:relative;z-index:1;
+  padding:0 20px;
+  display:flex;flex-direction:column;
+  align-items:flex-start;
+}
+.playbook-step-marker{
+  width:40px;height:40px;border-radius:50%;
+  background:var(--white);border:1.5px solid var(--ink-line);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:12px;font-weight:600;
+  color:var(--ink-muted);letter-spacing:.02em;
+  margin-bottom:18px;transition:all .3s;
+}
+.playbook-step:last-child .playbook-step-marker{
+  background:var(--gold);border-color:var(--gold-bright);color:#fff;
+}
+.playbook-step-year{
+  font-family:var(--serif);font-style:italic;font-size:20px;
+  font-weight:400;color:var(--gold);margin-bottom:8px;
+  letter-spacing:-.01em;
+}
+.playbook-step-title{
+  font-family:var(--serif);font-size:17px;font-weight:500;
+  color:var(--ink);line-height:1.3;margin-bottom:10px;
+  letter-spacing:-.005em;
+}
+.playbook-step-desc{
+  font-size:12.5px;color:var(--ink-soft);font-weight:400;
+  line-height:1.65;margin-bottom:14px;
+}
+.playbook-step-metric{
+  font-family:var(--mono);font-size:11px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--gold-ink);font-weight:500;
+  padding:5px 10px;border:1px solid var(--gold);
+  background:rgba(200,169,97,.06);
+  display:inline-block;
+}
+
+/* ═══════════════════════════════════════════════
+   ENGAGEMENT — matrice visuelle
+   ═══════════════════════════════════════════════ */
+.eng-matrix{
+  background:var(--white);border:1px solid var(--ink-line);
+  padding:56px 64px;position:relative;
+}
+.eng-matrix::before{
+  content:'';position:absolute;top:-1px;left:0;right:0;height:2px;
+  background:linear-gradient(to right, var(--gold), var(--gold-bright), var(--gold));
+}
+
+.eng-header{
+  display:grid;grid-template-columns:1fr 1fr;gap:48px;
+  margin-bottom:40px;padding-bottom:32px;
+  border-bottom:1px solid var(--ink-line);
+}
+.eng-side-title{
+  font-family:var(--serif);font-style:italic;font-size:28px;
+  font-weight:400;color:var(--ink);line-height:1.2;margin-bottom:6px;
+}
+.eng-side-desc{font-size:13px;color:var(--ink-muted);font-weight:300;line-height:1.6}
+
+.eng-rows{display:flex;flex-direction:column;gap:0}
+.eng-row{
+  display:grid;grid-template-columns:220px 1fr 1fr;gap:32px;
+  padding:18px 0;
+  border-bottom:1px solid var(--ink-line);
+  align-items:start;
+}
+.eng-row:last-child{border-bottom:none}
+.eng-row-lbl{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--ink-muted);font-weight:500;
+  padding-top:2px;
+}
+.eng-row-az{
+  font-size:13.5px;color:var(--ink);font-weight:500;
+  line-height:1.55;
+}
+.eng-row-az strong{color:var(--gold-ink);font-weight:600}
+.eng-row-inv{
+  font-size:13.5px;color:var(--ink-muted);font-weight:400;
+  line-height:1.55;
+}
+
+/* ═══════════════════════════════════════════════
+   EXPOSURE BLOCK — bloc dark-gold alignement total
+   ═══════════════════════════════════════════════ */
+.exposure-block{
+  background:var(--ink);color:#fff;
+  padding:64px 72px;
+  position:relative;overflow:hidden;
+  margin-bottom:48px;
+}
+.exposure-block::before{
+  content:'';position:absolute;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity:.5;pointer-events:none;
+}
+.exposure-block::after{
+  content:'';position:absolute;right:-150px;bottom:-150px;
+  width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(circle at center, rgba(200,169,97,.1), transparent 65%);
+  pointer-events:none;
+}
+.exp-inner{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:stretch}
+
+.exp-left{
+  display:flex;flex-direction:column;
+  justify-content:space-between;
+}
+
+.exp-eyebrow{
+  font-family:var(--mono);font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--gold-bright);font-weight:500;
+  margin-bottom:28px;display:flex;align-items:center;gap:14px;
+}
+.exp-eyebrow::before{content:'';width:24px;height:1px;background:var(--gold-bright)}
+
+.exp-headline{
+  font-family:var(--serif);font-size:38px;font-weight:300;line-height:1.15;
+  color:#fff;letter-spacing:-.01em;margin-bottom:36px;
+}
+.exp-headline em{font-style:italic;color:var(--gold-bright);font-weight:400}
+
+.exp-amount{
+  font-family:var(--serif);font-weight:400;color:var(--gold-bright);
+  font-size:80px;line-height:1;letter-spacing:-.03em;
+  margin-bottom:28px;
+}
+
+.exp-text{
+  font-size:14px;color:rgba(255,255,255,.65);line-height:1.75;
+  font-weight:300;max-width:440px;
+}
+.exp-text strong{color:#fff;font-weight:500}
+
+.exp-breakdown{
+  display:flex;flex-direction:column;gap:0;
+  padding-top:8px;
+}
+.exp-item{
+  display:grid;grid-template-columns:1fr auto;gap:20px;
+  padding:22px 0;
+  border-top:1px solid rgba(255,255,255,.08);
+  align-items:baseline;
+}
+.exp-item:first-child{border-top:none;padding-top:0}
+.exp-item:last-of-type{border-bottom:1px solid rgba(255,255,255,.08)}
+.exp-item-lbl{
+  display:flex;flex-direction:column;gap:4px;
+}
+.exp-item-name{
+  font-family:var(--serif);font-size:18px;font-weight:400;
+  color:#fff;line-height:1.3;
+}
+.exp-item-sub{
+  font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:rgba(255,255,255,.4);
+}
+.exp-item-val{
+  font-family:var(--serif);font-size:28px;font-weight:400;
+  color:var(--gold-bright);letter-spacing:-.01em;line-height:1;
+}
+.exp-total{
+  margin-top:8px;padding-top:24px;
+  border-top:2px solid var(--gold-bright);
+  display:grid;grid-template-columns:1fr auto;gap:20px;align-items:baseline;
+}
+.exp-total-lbl{
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--gold-bright);font-weight:500;
+}
+.exp-total-val{
+  font-family:var(--serif);font-size:42px;font-weight:500;
+  color:#fff;letter-spacing:-.02em;line-height:1;
+}
+
+/* ═══════════════════════════════════════════════
+   EXIT TABLE — scénarios de sortie chiffrés
+   ═══════════════════════════════════════════════ */
+.exit-block{
+  background:var(--cream);
+  border:1px solid var(--ink-line);
+  padding:48px 56px;
+  margin-top:48px;
+}
+.exit-head{
+  display:flex;flex-direction:column;gap:6px;
+  margin-bottom:32px;padding-bottom:24px;
+  border-bottom:1px solid var(--ink-line);
+}
+.exit-eyebrow{
+  font-family:var(--mono);font-size:10px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--gold);font-weight:500;
+}
+.exit-title{
+  font-family:var(--serif);font-size:28px;font-weight:400;
+  color:var(--ink);line-height:1.2;letter-spacing:-.005em;
+}
+.exit-title em{font-style:italic;color:var(--gold-ink)}
+.exit-sub{
+  font-size:13px;color:var(--ink-muted);font-weight:300;
+  line-height:1.7;margin-top:8px;
+}
+
+.exit-table{
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr 1fr;
+  gap:0;
+}
+.exit-table > div{
+  padding:18px 20px;
+  border-bottom:1px solid var(--ink-line);
+  display:flex;flex-direction:column;gap:3px;
+}
+.exit-table > div:nth-last-child(-n+4){border-bottom:none}
+
+.exit-th{
+  background:var(--ink);color:var(--gold-bright)!important;
+  font-family:var(--mono);font-size:10px;letter-spacing:.14em;
+  text-transform:uppercase;font-weight:500;
+  border-bottom:none!important;
+  padding:14px 20px!important;
+}
+.exit-th.main{color:#fff!important}
+
+.exit-cell-primary{
+  font-family:var(--serif);font-size:17px;font-weight:400;color:var(--ink);
+  line-height:1.3;
+}
+.exit-cell-sub{
+  font-size:11px;color:var(--ink-muted);font-weight:400;
+  letter-spacing:.01em;
+}
+.exit-cell-num{
+  font-family:var(--serif);font-size:20px;font-weight:500;
+  color:var(--ink);letter-spacing:-.01em;
+}
+.exit-cell-num.az{color:var(--gold-ink)}
+.exit-cell-moic{
+  font-family:var(--mono);font-size:11px;color:var(--ink-muted);
+  letter-spacing:.04em;margin-top:2px;
+}
+
+.exit-row-scenario{background:var(--white)}
+.exit-row-scenario.central{background:var(--gold-pale)}
+.exit-row-scenario.central .exit-cell-num.az{color:var(--gold-ink);font-size:22px}
+
+.exit-footnote{
+  font-size:11.5px;color:var(--ink-muted);font-style:italic;
+  line-height:1.6;margin-top:24px;padding-top:16px;
+  border-top:1px dashed var(--ink-line);
+  font-weight:300;
+}
+
+/* ═══════════════════════════════════════════════
+   POINTS DE VÉRIFICATION — Q&A
+   ═══════════════════════════════════════════════ */
+.qa-grid{display:flex;flex-direction:column;gap:2px}
+
+.qa{
+  background:var(--white);
+  border:1px solid var(--ink-line);
+  padding:30px 40px;
+  transition:all .3s;
+  cursor:default;
+}
+.qa:hover{
+  border-color:var(--gold);
+  background:var(--paper-warm);
+}
+.qa-q{
+  font-family:var(--serif);font-size:20px;font-weight:400;
+  color:var(--ink);line-height:1.3;margin-bottom:12px;
+  font-style:italic;
+  display:flex;align-items:flex-start;gap:14px;
+}
+.qa-q::before{
+  content:'Q';
+  font-family:var(--mono);font-size:10px;
+  color:var(--gold);font-style:normal;font-weight:600;
+  letter-spacing:.1em;text-transform:uppercase;
+  border:1px solid var(--gold);padding:3px 7px;
+  line-height:1;
+  margin-top:6px;flex-shrink:0;
+}
+.qa-a{
+  font-size:14px;color:var(--ink-soft);font-weight:400;
+  line-height:1.7;padding-left:32px;
+}
+.qa-a strong{color:var(--ink);font-weight:500}
+
+/* ═══════════════════════════════════════════════
+   PROFIL — personnel
+   ═══════════════════════════════════════════════ */
+.profil-grid{
+  display:grid;grid-template-columns:1.3fr 1fr;gap:80px;
+  align-items:start;
+}
+.profil-text{display:flex;flex-direction:column;gap:24px}
+.profil-text p{
+  font-size:15.5px;color:var(--ink);line-height:1.8;
+  font-weight:400;
+}
+.profil-text p strong{font-weight:600;color:var(--ink)}
+.profil-text p:first-child::first-letter{
+  font-family:var(--serif);font-size:64px;font-weight:400;
+  float:left;line-height:.85;padding:8px 10px 0 0;
+  color:var(--gold);
+}
+
+.profil-facts{
+  background:var(--cream);border:1px solid var(--ink-line);
+  padding:36px 40px;
+}
+.profil-facts-title{
+  font-family:var(--serif);font-size:22px;font-weight:400;
+  color:var(--ink);margin-bottom:24px;padding-bottom:16px;
+  border-bottom:1px solid var(--ink-line);
+  font-style:italic;
+}
+.fact-row{
+  display:grid;grid-template-columns:auto 1fr;gap:16px;
+  padding:12px 0;
+  border-bottom:1px solid var(--ink-line);
+  font-size:13px;align-items:baseline;
+}
+.fact-row:last-child{border-bottom:none}
+.fact-lbl{color:var(--ink-muted);font-weight:400}
+.fact-val{color:var(--ink);font-weight:500;text-align:right;letter-spacing:-.005em}
+
+/* ═══════════════════════════════════════════════
+   CLOSING / signature
+   ═══════════════════════════════════════════════ */
+.closing{
+  background:var(--ink);color:#fff;
+  padding:120px 40px 80px;
+  text-align:center;position:relative;overflow:hidden;
+}
+.closing::before{
+  content:'';position:absolute;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity:.6;pointer-events:none;
+}
+.closing-container{max-width:720px;margin:0 auto;position:relative;z-index:2}
+
+.closing-eyebrow{
+  font-family:var(--mono);font-size:10px;letter-spacing:.24em;
+  text-transform:uppercase;color:var(--gold-bright);
+  margin-bottom:32px;
+}
+
+.closing-quote{
+  font-family:var(--serif);font-weight:300;font-style:italic;
+  font-size:38px;line-height:1.4;
+  color:#fff;margin-bottom:40px;letter-spacing:-.005em;
+}
+.closing-quote em{color:var(--gold-bright);font-style:italic}
+
+.closing-sig{
+  display:inline-flex;flex-direction:column;align-items:center;
+  padding-top:40px;border-top:1px solid rgba(255,255,255,.15);
+  max-width:360px;margin:0 auto;
+}
+.closing-sig-name{
+  font-family:var(--serif);font-size:32px;font-style:italic;
+  color:#fff;font-weight:300;margin-bottom:4px;
+}
+.closing-sig-role{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;
+  text-transform:uppercase;color:rgba(255,255,255,.4);
+}
+
+/* ═══════════════════════════════════════════════
+   FOOTER
+   ═══════════════════════════════════════════════ */
+footer{
+  background:#050504;color:rgba(255,255,255,.4);
+  padding:48px 40px;
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:20px;
+}
+footer p{
+  font-size:11px;letter-spacing:.04em;line-height:1.7;
+  font-family:var(--mono);
+}
+footer .bold{color:rgba(255,255,255,.7);font-weight:500}
+
+/* ═══════════════════════════════════════════════
+   ANIMATIONS
+   ═══════════════════════════════════════════════ */
+@keyframes fadeInUp{
+  from{opacity:0;transform:translateY(24px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@keyframes subtleRise{
+  from{transform:translateY(12px);opacity:.4}
+  to{transform:translateY(0);opacity:1}
+}
+
+.reveal{opacity:1;transform:none;transition:opacity .9s cubic-bezier(.22,1,.36,1), transform .9s cubic-bezier(.22,1,.36,1)}
+
+.counter{display:inline-block}
+
+/* ═══════════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════════ */
+@media(max-width:900px){
+  .hero-container{grid-template-columns:1fr;gap:48px;padding-top:40px}
+  .hero-name{font-size:64px}
+  .hero-stat-num{font-size:48px}
+  .hero-portrait-frame{width:240px;height:300px;margin:0 auto}
+  .hero-portrait-caption{bottom:-36px}
+  .section-head{grid-template-columns:1fr;gap:24px}
+  .manif-title{font-size:38px;margin-bottom:48px}
+  .manif-grid{grid-template-columns:1fr;gap:40px;margin-bottom:48px}
+  .manif-point{padding:0 0 32px;border-right:none;border-bottom:1px solid var(--ink-line)}
+  .manif-point:last-child{border-bottom:none;padding-bottom:0}
+  .manif-conviction{padding:32px 28px}
+  .manif-conv-text{font-size:22px}
+  .manifesto{padding:80px 24px}
+
+  /* EXEC SUMMARY mobile */
+  .exec-summary{padding:40px 24px 44px}
+  .exec-title{font-size:24px;margin-bottom:24px}
+  .exec-grid{grid-template-columns:1fr 1fr;gap:24px 16px;padding-top:20px}
+  .exec-cell{padding:0;border-right:none}
+  .exec-cell-val{font-size:18px}
+  .section-num{font-size:56px}
+  .section-title{font-size:36px}
+  .timeline-wrap{grid-template-columns:40px 1fr}
+  .timeline-spine{grid-column:1}
+  .tl-card.left,.tl-card.right{grid-column:2;text-align:left;padding-left:32px;padding-right:0}
+  .tl-card.left .tl-desc,.tl-card.right .tl-desc{margin-left:0;margin-right:auto}
+  .tl-node{grid-column:1}
+  .deals-grid,.sci-grid,.profil-grid{grid-template-columns:1fr;gap:32px}
+  .pat-hero-metrics{grid-template-columns:1fr 1fr;gap:28px 16px;padding:32px 24px}
+  .pat-hero-metric{padding:0;border-right:none}
+  .phm-val{font-size:32px}
+  .phm-desc{font-size:11.5px}
+  .phm-eyebrow{font-size:9px}
+  .sci-card{padding:28px 24px}
+  .sci-title{font-size:20px}
+  .tenant-row{flex-direction:column;align-items:flex-start;gap:6px;padding:12px 0}
+  .tenant-loyer{font-size:16px;align-self:flex-end}
+  .sci-footer{flex-direction:column;align-items:flex-start;gap:6px}
+  .sci-note{font-size:11.5px;line-height:1.5}
+  .revenue-viz{padding:32px 24px}
+  .viz-row{
+    display:grid!important;
+    grid-template-columns:1fr auto!important;
+    gap:4px 16px;padding:10px 0;
+    align-items:baseline;
+  }
+  .viz-label{font-size:12.5px;grid-column:1}
+  .viz-value{font-size:15px;grid-column:2;text-align:right}
+  .viz-bar-wrap{grid-column:1 / -1;height:6px;margin-top:4px}
+  .viz-title{font-size:18px}
+  .viz-sub{font-size:12.5px}
+  .eng-row{grid-template-columns:1fr;gap:8px}
+  .eng-header{grid-template-columns:1fr;gap:20px}
+  nav{padding:12px 20px}
+  .nav-links{display:none}
+  section{padding:80px 24px}
+  .closing-quote{font-size:26px}
+  .eng-matrix{padding:36px 28px}
+  .qa{padding:24px 28px}
+  .qa-q{font-size:17px}
+  .deal-metrics{grid-template-columns:1fr;gap:16px}
+  .deal-metric{border-right:none;border-bottom:1px solid var(--ink-line);padding:12px 0}
+  .deal-metric:last-child{border-bottom:none}
+
+  /* EXPOSURE BLOCK — stack vertically on mobile */
+  .exposure-block{padding:40px 28px}
+  .exp-inner{grid-template-columns:1fr;gap:40px}
+  .exp-headline{font-size:28px;margin-bottom:24px}
+  .exp-amount{font-size:56px;margin-bottom:20px}
+  .exp-text{max-width:100%;font-size:13.5px}
+  .exp-item-name{font-size:16px}
+  .exp-item-val{font-size:22px}
+  .exp-total-val{font-size:32px}
+  .exp-total-lbl{font-size:10px}
+
+  /* EXIT TABLE — stack scenarios on mobile */
+  .exit-block{padding:28px 20px}
+  .exit-head{margin-bottom:20px;padding-bottom:16px}
+  .exit-title{font-size:22px}
+  .exit-sub{font-size:12.5px}
+  .exit-table{display:block;grid-template-columns:none}
+  .exit-table .exit-th{display:none!important}
+  .exit-row-scenario{
+    display:block!important;
+    padding:16px 20px!important;
+    border-bottom:1px solid var(--ink-line)!important;
+  }
+  /* Scenario header : bigger, dark bg */
+  .exit-row-scenario[data-scenario-header="true"]{
+    background:var(--ink);
+    padding:20px!important;
+    margin-top:16px;
+    border-bottom:none!important;
+  }
+  .exit-row-scenario[data-scenario-header="true"]:first-of-type{margin-top:0}
+  .exit-row-scenario[data-scenario-header="true"] .exit-cell-primary{
+    color:var(--gold-bright);font-size:18px;
+  }
+  .exit-row-scenario[data-scenario-header="true"] .exit-cell-sub{
+    color:rgba(255,255,255,.6);font-size:12px;
+  }
+  /* Central scenario header */
+  .exit-row-scenario.central[data-scenario-header="true"]{
+    background:var(--gold-ink);
+  }
+  .exit-row-scenario.central[data-scenario-header="true"] .exit-cell-primary{
+    color:#fff;
+  }
+  .exit-row-scenario.central[data-scenario-header="true"] .exit-cell-sub{
+    color:rgba(255,255,255,.75);
+  }
+  /* Data rows — show label via data-label attribute */
+  .exit-row-scenario[data-label]{
+    background:var(--white);
+    display:grid!important;
+    grid-template-columns:auto 1fr;
+    align-items:baseline;
+    gap:14px;
+  }
+  .exit-row-scenario.central[data-label]{
+    background:var(--gold-pale);
+  }
+  .exit-row-scenario[data-label]::before{
+    content:attr(data-label);
+    font-family:var(--mono);font-size:10px;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--ink-muted);font-weight:500;
+    white-space:nowrap;
+  }
+  .exit-row-scenario[data-label] .exit-cell-num{
+    font-family:var(--serif);font-size:17px;font-weight:500;
+    color:var(--ink);text-align:right;
+  }
+  .exit-row-scenario[data-label] .exit-cell-num.az{color:var(--gold-ink)}
+  .exit-row-scenario[data-label] .exit-cell-moic{
+    grid-column:1/-1;
+    font-family:var(--mono);font-size:10.5px;color:var(--ink-muted);
+    text-align:right;margin-top:2px;
+  }
+
+  /* Hero stats — un peu plus serrés sur mobile */
+  .hero-stat{padding:20px 0}
+  .hero-stat-desc{font-size:12.5px}
+
+  /* Consolidation band patrimoine */
+  .consol-band{grid-template-columns:1fr 1fr;gap:24px;padding:24px 28px}
+
+  /* PLAYBOOK — stack vertically on mobile */
+  .playbook-block{padding:28px 24px}
+  .playbook-head{margin-bottom:28px;padding-bottom:20px}
+  .playbook-title{font-size:22px}
+  .playbook-sub{font-size:12.5px}
+  .playbook-steps{grid-template-columns:1fr;gap:24px}
+  .playbook-steps::before{display:none}
+  .playbook-step{
+    padding:20px 0 0;
+    border-top:1px solid var(--ink-line);
+  }
+  .playbook-step:first-child{border-top:none;padding-top:0}
+  .playbook-step-marker{margin-bottom:12px}
+}
+
+/* ═══════════════════════════════════════════════
+   PRINT
+   ═══════════════════════════════════════════════ */
+@media print{
+  nav,.closing{display:none}
+  body{background:#fff}
+  .hero{min-height:auto;padding:40px;page-break-after:always}
+  section{padding:40px;page-break-inside:avoid}
+  .section-num{font-size:48px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+  <span class="nav-brand">Azel Belkadi · Porteur de projet</span>
+  <div class="nav-links">
+    <a href="#parcours">Parcours</a>
+    <a href="#track">Track record</a>
+    <a href="#patrimoine">Patrimoine</a>
+    <a href="#engagement">Engagement</a>
+    <a href="#verification">Vérification</a>
+  </div>
+  <span class="nav-conf">Confidentiel · Avril 2026</span>
+</nav>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- HERO                                             -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="hero">
+  <div class="hero-container">
+    <div class="hero-left">
+      <div class="hero-eyebrow">Point 6 · Porteur de projet · District One</div>
+      <h1 class="hero-name">Azel<em>Belkadi</em></h1>
+      <p class="hero-tagline">Investisseur immobilier tertiaire et commercial &mdash; Grand Avignon depuis 2012.</p>
+      <p class="hero-intro">Certaines op&eacute;rations n&eacute;cessitent les deux : un capital patient et un op&eacute;rateur qui conna&icirc;t le terrain depuis quatorze ans. <strong>District One en fait partie.</strong></p>
+    </div>
+
+    <div class="hero-portrait-wrap">
+      <div class="hero-portrait-frame">
+        <img class="hero-portrait-img" src="data:image/jpeg;base64,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zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzyQwwwAAQAAAAAAAAAAAAAAwzTzzzzzzzzzzzzzxTyiAAAAQxzzzzzzwwAAAAADzzzzzzzzzzzzzzxTygABBTzzATBiDzzzzzzzwzzzzzzzzzzzzzzzxTzgAAxzzijxTQgBDzDDTjzzTzzzzzzzzzzzzzxTAABTzyhyxBCwzBiDzzzwzxTzzzzzzzzzzzzzygATzzzggwjAihTjxjDxzzzBTzzzzzzzzzzzzzygDzzgwRzxCQCiCABjwTyAQxTzzzzzzzzzzzzzzTzzyzzwzSySjyCQwgzwABTjTzzzzzzzzzzzzzxChzzzigDgSgxRwTSggQwTwTTzzzzzzzzzzzzzxRzyAxBzSRxgxhxCiTjyRBSjTzzzzzzzzzzzzzxDQzBiDChhTAjjARjhBgDgSDTzzzzzzzzzzzzzyzhyhCTARyhDyixyDBQBwRxTTzzzzzzzzzzzzzwSSCgRhiQgBhxTjjhhxTQzijTzzzzzzzzzzzzzyyTxTxSQhxjhhQAzwQxCiwgxzzzzzzzzzzzzzzwTziRDCAxDzBQjDTTiwAQASjzzzzzzzzzzzzzzzwywzhQhBAighzywDjggwjRRzzzzzzzzzzzzzzyDBSSQhASyixCigThxhQwDRjzzzzzzzzzzzzzzwByziDiTiSgRDyChAAyxwhDxTzzzzzzzzzzzzzxCzTSzAAjCShBBwgyxADSwBzzzzzzzzzzzzzzzzzBBigghQzzyCATxziCRRzBhzzzzzzzzzzzzzzyRghRhwAwTiySwxBBjgQTyhTTzzzzzzzzzzzzzxChzDjTCiQyyBhigDBzSDACTTzzzzzzzzzzzzzzATTBjiwBDzDTDAhgzjjzSwzzzzzzzzzzzzzzzwgQwzgiBTzDTTwTzgygTziRRTzzzzzzzzzzzzzxQDjDiQwhBQjjRyRzDDxwTCTzzzzzzzzzzzzzzxjRAyyjzxwRjRRgShRBwDARBTzzzzzzzzzzzzzxjAyCxBgiQDCAAAwjgRTiBQjTzzzzzzzzzzzzzzCQAyRwgQRgBRTRBiziDjDgzTzzzzzzzzzzzzzzSCziyBwC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" alt="Azel Belkadi — Porteur de projet District One" />
+        <div class="hero-portrait-overlay"></div>
+        <div class="hero-portrait-caption"><span>Azel Belkadi · 2026</span></div>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="hero-stat">
+        <div class="hero-stat-num">14<em>ans</em></div>
+        <div class="hero-stat-meta">
+          <span class="hero-stat-lbl">Présence terrain continue</span>
+          <span class="hero-stat-desc">Bassin Grand Avignon &mdash; tertiaire et commercial. Une seule zone géographique, travaillée en profondeur.</span>
+        </div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">2<em>sorties</em></div>
+        <div class="hero-stat-meta">
+          <span class="hero-stat-lbl">Cessions notariées documentées</span>
+          <span class="hero-stat-desc">Les deux opérations ont été menées jusqu'à la cession avec plus-value constatée. Actes disponibles.</span>
+        </div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">3,72<em>M€</em></div>
+        <div class="hero-stat-meta">
+          <span class="hero-stat-lbl">Exposition Grand Avignon</span>
+          <span class="hero-stat-desc">100% de mon patrimoine net engag&eacute; sur le m&ecirc;me bassin que District One. Alignement g&eacute;ographique total.</span>
+        </div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">4,21<em>M€</em></div>
+        <div class="hero-stat-meta">
+          <span class="hero-stat-lbl">Actif sous gestion actuel</span>
+          <span class="hero-stat-desc">Valeur consolid&eacute;e des deux SCI en exploitation (Reinaudo &amp; Le&nbsp;1). District One apr&egrave;s arbitrages : ordre de grandeur similaire, m&ecirc;me m&eacute;thode, simplement plus de volume.</span>
+        </div>
+      </div>
+
+      <div class="hero-signature">
+        <div class="hero-signature-left">
+          <div><span class="loc">Le Pontet (84)</span></div>
+          <div>Grand Avignon</div>
+        </div>
+        <div class="hero-signature-right">
+          <div>Avril 2026</div>
+          <div>Usage exclusif — Banque & Conseil</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- EXECUTIVE SUMMARY                                -->
+<!-- ═══════════════════════════════════════════════ -->
+<section class="exec-summary">
+  <div class="exec-inner">
+    <span class="exec-eyebrow">Executive Summary &middot; L'essentiel</span>
+    <h2 class="exec-title">Un porteur avec <em>14 ans de terrain</em>, quatre op&eacute;rations men&eacute;es, et un <em>alignement patrimonial total</em> sur le bassin District One.</h2>
+    <div class="exec-grid">
+      <div class="exec-cell">
+        <div class="exec-cell-lbl">Track Record</div>
+        <div class="exec-cell-val"><strong>4 op&eacute;rations</strong> dont <strong>2 c&eacute;d&eacute;es</strong> avec plus-value notari&eacute;e (+77,8% et +54,3%)</div>
+      </div>
+      <div class="exec-cell">
+        <div class="exec-cell-lbl">Alignement</div>
+        <div class="exec-cell-val">Engage <strong>150&nbsp;K&euro;</strong> en direct + <strong>caution 750&nbsp;K&euro;</strong> + reverse vesting au pacte</div>
+      </div>
+      <div class="exec-cell">
+        <div class="exec-cell-lbl">Exposition</div>
+        <div class="exec-cell-val"><strong>3,72&nbsp;M&euro;</strong> de patrimoine net 100% align&eacute; sur le bassin Grand Avignon</div>
+      </div>
+      <div class="exec-cell">
+        <div class="exec-cell-lbl">Structure Investisseur</div>
+        <div class="exec-cell-val">Coupon fixe <strong>9%</strong> OC+CCA &middot; Sortie refi An&nbsp;4-5 &middot; TRI plancher <strong>9%</strong></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- MANIFESTO — ce que je vois                       -->
+<!-- ═══════════════════════════════════════════════ -->
+<section class="manifesto" id="manifesto">
+  <div class="container">
+    <div class="manif-inner reveal">
+      <div class="manif-eyebrow">
+        <span class="manif-mark">&mdash;</span>
+        <span>Ce que je vois depuis quatorze ans</span>
+      </div>
+
+      <h2 class="manif-title">
+        <span class="manif-line">Trois observations &mdash;</span>
+        <span class="manif-line"><em>une conviction partag&eacute;e.</em></span>
+      </h2>
+
+      <div class="manif-grid">
+        <div class="manif-point">
+          <div class="manif-point-num">01</div>
+          <p class="manif-point-head">Un actif connu, jamais structur&eacute;</p>
+          <p class="manif-point-text">Cet ensemble immobilier est un rep&egrave;re visuel sur la voie express Avignon&ndash;Carpentras depuis pr&egrave;s de vingt ans. Il a &eacute;t&eacute; g&eacute;r&eacute; comme une juxtaposition de baux individuels, jamais comme un portefeuille structur&eacute;. C'est pr&eacute;cis&eacute;ment la marge d'optimisation qui rend l'op&eacute;ration attractive.</p>
+        </div>
+
+        <div class="manif-point">
+          <div class="manif-point-num">02</div>
+          <p class="manif-point-head">Premi&egrave;re zone commerciale du d&eacute;partement</p>
+          <p class="manif-point-text">Avignon Nord est la <strong>premi&egrave;re zone commerciale du d&eacute;partement</strong> et l'une des plus importantes de la r&eacute;gion PACA, sur un bassin de chalandise de pr&egrave;s de 500&thinsp;000 habitants. Malgr&eacute; les contraintes fonci&egrave;res et urbanistiques qui limitent l'&eacute;mergence de nouvelles zones, <strong>la zone de chalandise continue de s'&eacute;tendre</strong>. La demande locative commerciale reste structurellement tendue, ce qui s&eacute;curise les loyers en place et cr&eacute;e une prime sur les rares actifs bien situ&eacute;s.</p>
+        </div>
+
+        <div class="manif-point">
+          <div class="manif-point-num">03</div>
+          <p class="manif-point-head">80 000 v&eacute;hicules par jour</p>
+          <p class="manif-point-text">La voie express qui longe District One transporte environ <strong>80&thinsp;000 v&eacute;hicules chaque jour</strong> (source : comptage DIRMED, donn&eacute;es Minist&egrave;re de la Transition &eacute;cologique). C'est une rente de visibilit&eacute; commerciale consid&eacute;rable, actuellement sous-valoris&eacute;e dans les loyers en place. Le levier de repositionnement est identifiable et quantifiable.</p>
+        </div>
+      </div>
+
+      <div class="manif-conviction">
+        <div class="manif-conv-eyebrow">La conviction</div>
+        <p class="manif-conv-text">
+          Ce n'est pas un pari. <em>C'est un playbook d&eacute;j&agrave; ex&eacute;cut&eacute; quatre fois, appliqu&eacute; &agrave; plus grande &eacute;chelle.</em>
+        </p>
+        <p class="manif-conv-sub">Sur les quatre op&eacute;rations men&eacute;es depuis 2012 &mdash; les deux c&eacute;d&eacute;es avec plus-value, les deux toujours en exploitation &mdash; j'ai appliqu&eacute; la m&ecirc;me m&eacute;thode : acqu&eacute;rir un actif &agrave; rendement classique de 8&ndash;9%, puis aller chercher la performance en ajoutant des sources de revenus additionnelles, en divisant des cellules l&agrave; o&ugrave; cela cr&eacute;e de la valeur, et en r&eacute;alignant les loyers sur les valeurs locatives r&eacute;elles du march&eacute;. <strong>Rendements constat&eacute;s sur les 4 op&eacute;rations : de 8&ndash;9% &agrave; l'entr&eacute;e, 11% &agrave; 21% selon les op&eacute;rations (MOIC brut 1,54x et 1,78x sur les 2 c&eacute;d&eacute;es &mdash; nets de frais 1,41x et 1,62x ; yield courante 19&ndash;21% sur loyers encaiss&eacute;s pour les 2 en cours).</strong> District One est le m&ecirc;me exercice, avec plus de leviers encore &mdash; dont certains ne sont pas enti&egrave;rement expos&eacute;s dans cette pr&eacute;sentation. L'emplacement est aussi qualitatif que celui de mes op&eacute;rations pr&eacute;c&eacute;dentes, sur un actif simplement plus grand.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- PARCOURS — TIMELINE                              -->
+<!-- ═══════════════════════════════════════════════ -->
+<section id="parcours" style="background:var(--paper)">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-num">01</div>
+      <div class="section-meta">
+        <span class="section-eyebrow">Parcours · Formation · Expérience</span>
+        <h2 class="section-title">Un parcours <em>audit et conseil</em>,<br>au service d'une conviction terrain</h2>
+        <p class="section-desc">Trajectoire continue entre rigueur d'audit Big Four, expérience opérationnelle internationale, et investissement immobilier local depuis 2012. Chaque étape a contribué à la maîtrise actuelle du dossier District One.</p>
+      </div>
+    </div>
+
+    <div class="timeline-wrap">
+      <div class="timeline-spine">
+        <!-- line injected by CSS ::before -->
+      </div>
+
+      <!-- Entry 1 -->
+      <div class="tl-entry reveal">
+        <div class="tl-card left">
+          <div class="tl-year">2009</div>
+          <div class="tl-role">Auditeur financier</div>
+          <div class="tl-company">PwC · Marseille</div>
+          <p class="tl-desc">Premier poste en cabinet Big Four. Apprentissage de la rigueur de lecture des comptes et de l'analyse financière sur mandats clients grands comptes.</p>
+        </div>
+        <div class="tl-node"><div class="tl-node-dot"></div></div>
+        <div></div>
+      </div>
+
+      <!-- Entry 2 -->
+      <div class="tl-entry reveal">
+        <div></div>
+        <div class="tl-node"><div class="tl-node-dot"></div></div>
+        <div class="tl-card right">
+          <div class="tl-year">2010&mdash;2016</div>
+          <div class="tl-role">Senior Manager Audit</div>
+          <div class="tl-company">KPMG · Avignon</div>
+          <p class="tl-desc">Six ans sur des missions d'audit légal et contractuel. Montée en responsabilité, pilotage d'équipes, gestion de portefeuilles de mandats. Formation continue à la comptabilité analytique et à l'évaluation d'entreprises.</p>
+          <span class="tl-tag">Financement · Analyse de bilan</span>
+        </div>
+      </div>
+
+      <!-- Entry 3 — 2012 début immo -->
+      <div class="tl-entry reveal">
+        <div class="tl-card left">
+          <div class="tl-year">2012</div>
+          <div class="tl-role">Première acquisition immobilière</div>
+          <div class="tl-company">SCI Les Cygognes · Avignon</div>
+          <p class="tl-desc">VEFA 315 K€, locataire BNP Paribas signé en direct, bail 9 ans à 31 500 €/an. Point de départ d'une présence continue sur le marché tertiaire du Grand Avignon.</p>
+          <span class="tl-tag">Bail BNP Paribas · Rdt 10,9%</span>
+        </div>
+        <div class="tl-node"><div class="tl-node-dot"></div></div>
+        <div></div>
+      </div>
+
+      <!-- Entry 4 -->
+      <div class="tl-entry reveal">
+        <div></div>
+        <div class="tl-node"><div class="tl-node-dot"></div></div>
+        <div class="tl-card right">
+          <div class="tl-year">2015</div>
+          <div class="tl-role">Acquisition patrimoniale familiale</div>
+          <div class="tl-company">Le Pontet &middot; SMC Soci&eacute;t&eacute; G&eacute;n&eacute;rale</div>
+          <p class="tl-desc">Op&eacute;ration patrimoniale familiale dont j'assure le pilotage direct : identification de l'actif, n&eacute;gociation d'acquisition, gestion locative avec SMC Soci&eacute;t&eacute; G&eacute;n&eacute;rale en place, bail notari&eacute; 9 ans &agrave; loyer index&eacute; ILC. Premi&egrave;re exp&eacute;rience de reprise d'actif occup&eacute; par un locataire de premier rang.</p>
+        </div>
+      </div>
+
+      <!-- Entry 5 -->
+      <div class="tl-entry reveal">
+        <div class="tl-card left">
+          <div class="tl-year">2016&mdash;2021</div>
+          <div class="tl-role">Directeur Financier</div>
+          <div class="tl-company">Compal Europe &middot; BVA &middot; Avignon</div>
+          <p class="tl-desc">Passage c&ocirc;t&eacute; op&eacute;rationnel. Pilotage du contr&ocirc;le de gestion, arbitrages de BFR, n&eacute;gociations bancaires, relations investisseurs. Cinq ans au contact direct de d&eacute;cisions d'investissement industriel.</p>
+          <span class="tl-tag">Pilotage &middot; N&eacute;gociation bancaire</span>
+        </div>
+        <div class="tl-node"><div class="tl-node-dot"></div></div>
+        <div></div>
+      </div>
+
+      <!-- Entry 5b — SCI Reinaudo -->
+      <div class="tl-entry reveal">
+        <div></div>
+        <div class="tl-node"><div class="tl-node-dot"></div></div>
+        <div class="tl-card right">
+          <div class="tl-year">Mai 2021</div>
+          <div class="tl-role">Acquisition SCI Reinaudo</div>
+          <div class="tl-company">SCI Reinaudo &middot; Le Pontet</div>
+          <p class="tl-desc">Acquisition d'un local commercial de 210&nbsp;m&sup2; avec mezzanine au 259 rue Louis Pasteur &agrave; Le Pontet (lot 6B, lotissement Cit&eacute; Real), compl&eacute;t&eacute; d'une <strong>parcelle de terrain &agrave; b&acirc;tir adjacente</strong> (levier foncier constructible, valorisation latente non exploit&eacute;e &agrave; ce jour). Acte re&ccedil;u par M<sup>e</sup> Coline Pietri-Gulon (LegalNot Tarascon). D&eacute;but de la strat&eacute;gie de cr&eacute;ation de sources de revenus multiples sur un m&ecirc;me actif.</p>
+          <span class="tl-tag">Playbook multi-revenus &middot; Acte notari&eacute;</span>
+        </div>
+      </div>
+
+      <!-- Entry 6 — Dubai -->
+      <div class="tl-entry reveal">
+        <div class="tl-card left">
+          <div class="tl-year">2021&mdash;2023</div>
+          <div class="tl-role">Parenth&egrave;se internationale</div>
+          <div class="tl-company">Duba&iuml; &middot; &Eacute;mirats arabes unis</div>
+          <p class="tl-desc">Deux ann&eacute;es &agrave; Duba&iuml; en famille. Gestion &agrave; distance du portefeuille immobilier fran&ccedil;ais, encaissement de redevances, et exposition &agrave; un &eacute;cosyst&egrave;me d'investissement international. R&eacute;sidence fiscale fran&ccedil;aise maintenue, obligations d&eacute;claratives respect&eacute;es sur l'ensemble de la p&eacute;riode. Retour en France choisi pour reprendre une pr&eacute;sence terrain active sur le bassin Grand Avignon.</p>
+        </div>
+        <div class="tl-node"><div class="tl-node-dot"></div></div>
+        <div></div>
+      </div>
+
+      <!-- Entry 6b — SCI Le 1 -->
+      <div class="tl-entry reveal">
+        <div></div>
+        <div class="tl-node"><div class="tl-node-dot"></div></div>
+        <div class="tl-card right">
+          <div class="tl-year">Ao&ucirc;t 2022</div>
+          <div class="tl-role">Acquisition SCI Le&nbsp;1</div>
+          <div class="tl-company">SCI Le&nbsp;1 &middot; Avignon Fontcouverte</div>
+          <p class="tl-desc">Acquisition d'un ensemble commercial de 830&nbsp;m&sup2; de surface utile exploitable (parcelle cadastrale 1&thinsp;283&nbsp;m&sup2;) au 1 Avenue de Fontcouverte &agrave; Avignon, pour 640&thinsp;000&nbsp;&euro;. Acte re&ccedil;u par M<sup>e</sup> Emmanuel Carlotti (Aramon). Op&eacute;ration structur&eacute;e et g&eacute;r&eacute;e depuis Duba&iuml; jusqu'au retour en France. D&eacute;ploiement de la m&eacute;thode : red&eacute;coupage, renegotiation avec W&uuml;rth, relocation &agrave; Pare Brise Avignon et Le Takadum.</p>
+          <span class="tl-tag">640&nbsp;K&euro; &middot; Acte notari&eacute;</span>
+        </div>
+      </div>
+
+      <!-- Entry 7 — District 13 -->
+      <div class="tl-entry reveal">
+        <div class="tl-card left">
+          <div class="tl-year">2023&mdash;</div>
+          <div class="tl-role">Direction de projets entrepreneuriaux</div>
+          <div class="tl-company">District 13 &middot; Grand Avignon</div>
+          <p class="tl-desc">Pilotage d'un portefeuille d'activit&eacute;s entrepreneuriales au Grand Avignon (concepts f&amp;b, supports publicitaires, licences de marque). Pr&eacute;sence terrain quotidienne sur le bassin, maillage commer&ccedil;ant renforc&eacute;, connaissance directe des op&eacute;rateurs et foncier de la zone.</p>
+          <span class="tl-tag">Pr&eacute;sence terrain &middot; R&eacute;seau local</span>
+        </div>
+        <div class="tl-node"><div class="tl-node-dot"></div></div>
+        <div></div>
+      </div>
+
+      <!-- Entry 8 — Cessions -->
+      <div class="tl-entry reveal">
+        <div></div>
+        <div class="tl-node"><div class="tl-node-dot"></div></div>
+        <div class="tl-card right">
+          <div class="tl-year">2021 &middot; 2023</div>
+          <div class="tl-role">Deux cessions avec plus-value</div>
+          <div class="tl-company">Actes notari&eacute;s disponibles</div>
+          <p class="tl-desc">Cession du Pontet SMC en 2021 (op&eacute;ration patrimoniale familiale, pilotage direct de l'acquisition &agrave; la revente : 790&nbsp;K&euro;, +54,3%) puis cession de la SCI Les Cygognes en septembre 2023 aupr&egrave;s de la SCI Crousillat (560&nbsp;K&euro;, +77,8%, acte M<sup>e</sup> Coline Pietri). Deux sorties men&eacute;es jusqu'au bout, deux plus-values constat&eacute;es.</p>
+          <span class="tl-tag">+523&nbsp;K&euro; PV brute cumul&eacute;e</span>
+        </div>
+      </div>
+
+      <!-- Entry 9 — Now D1 -->
+      <div class="tl-entry reveal">
+        <div class="tl-card left">
+          <div class="tl-year">2026</div>
+          <div class="tl-role">District One · D1</div>
+          <div class="tl-company">SCI District One en formation</div>
+          <p class="tl-desc">Acquisition d'un ensemble mixte commercial de 10 092 m² à Le Pontet (ZI Fontvert). Prix d'acquisition 10 M€, structuration SPV à l'IS, architecture OC + CCA, arbitrage An 2-3. Opération la plus structurée du parcours.</p>
+          <span class="tl-tag">En cours · Structuration finale</span>
+        </div>
+        <div class="tl-node"><div class="tl-node-dot" style="background:var(--gold)"></div></div>
+        <div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- TRACK RECORD                                     -->
+<!-- ═══════════════════════════════════════════════ -->
+<section id="track" style="background:var(--white)">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-num">02</div>
+      <div class="section-meta">
+        <span class="section-eyebrow">Track record · Opérations cédées</span>
+        <h2 class="section-title">Deux cessions notariées,<br><em>deux plus-values documentées</em></h2>
+        <p class="section-desc">Les deux opérations ci-dessous ont été menées jusqu'à la cession. Rendements constatés, pas projetés. Actes notariés, baux et décomptes de cession disponibles sur demande.</p>
+      </div>
+    </div>
+
+    <div class="deals-grid reveal">
+
+      <!-- DEAL 01 -->
+      <div class="deal">
+        <div class="deal-header">
+          <span class="deal-status">Réalisée &amp; cédée</span>
+          <span class="deal-period">2012 &rarr; 2023</span>
+        </div>
+        <div class="deal-body">
+          <h3 class="deal-title">SCI Les Cygognes &mdash; BNP Paribas</h3>
+          <p class="deal-loc">ZAC Pôle Technologique · Route de l'Aérodrome · Avignon (84140)</p>
+
+          <div class="deal-metrics">
+            <div class="deal-metric">
+              <div class="deal-metric-val">560&thinsp;K€</div>
+              <div class="deal-metric-lbl">Prix cession</div>
+            </div>
+            <div class="deal-metric">
+              <div class="deal-metric-val accent">+77,8%</div>
+              <div class="deal-metric-lbl">Plus-value</div>
+            </div>
+            <div class="deal-metric">
+              <div class="deal-metric-val">1,78x</div>
+              <div class="deal-metric-lbl">MOIC brut</div>
+            </div>
+          </div>
+
+          <ul class="deal-facts">
+            <li>Acquisition VEFA en 2012 pour 315&thinsp;000&nbsp;€</li>
+            <li>Bail commercial BNP Paribas 9 ans &mdash; loyer 31&thinsp;500&nbsp;€/an (rendement 10,9%)</li>
+            <li>Indexation ILC appliquée sur toute la durée du bail</li>
+            <li>Cession le 01/09/2023 &mdash; acte re&ccedil;u par M<sup>e</sup> Coline Pietri (office Deltanot Alpilles &agrave; Paradou)</li>
+            <li>Acqu&eacute;reur final : SCI Crousillat (Aix-en-Provence) &mdash; plus-value nette de frais +245&thinsp;000&nbsp;€ (MOIC net 1,62x)</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- DEAL 02 -->
+      <div class="deal">
+        <div class="deal-header">
+          <span class="deal-status">R&eacute;alis&eacute;e &amp; c&eacute;d&eacute;e</span>
+          <span class="deal-period">2015 &rarr; 2021</span>
+        </div>
+        <div class="deal-body">
+          <h3 class="deal-title">Le Pontet &mdash; SMC Soci&eacute;t&eacute; G&eacute;n&eacute;rale</h3>
+          <p class="deal-loc">Avenue Louis Pasteur &middot; Le Pontet (84130) &middot; Cadastre AV&nbsp;188</p>
+
+          <div class="deal-metrics">
+            <div class="deal-metric">
+              <div class="deal-metric-val">790&thinsp;K&euro;</div>
+              <div class="deal-metric-lbl">Prix cession</div>
+            </div>
+            <div class="deal-metric">
+              <div class="deal-metric-val accent">+54,3%</div>
+              <div class="deal-metric-lbl">Plus-value</div>
+            </div>
+            <div class="deal-metric">
+              <div class="deal-metric-val">1,54x</div>
+              <div class="deal-metric-lbl">MOIC brut</div>
+            </div>
+          </div>
+
+          <ul class="deal-facts">
+            <li>Op&eacute;ration patrimoniale familiale &mdash; identification de l'actif, n&eacute;gociation d'acquisition, gestion locative et pilotage de la cession assur&eacute;s en direct</li>
+            <li>Acquisition 2015 avec SMC Soci&eacute;t&eacute; G&eacute;n&eacute;rale locataire en place</li>
+            <li>Bail notari&eacute; 9 ans fermes, loyer ILC 48&thinsp;200 &rarr; 50&thinsp;454&nbsp;&euro;/an</li>
+            <li>D&eacute;p&ocirc;t de garantie dispens&eacute; (locataire de premier rang)</li>
+            <li>Cession 2021 &mdash; acte notari&eacute;, commission apporteur 70&thinsp;K&euro;</li>
+            <li>Plus-value brute +278&thinsp;K&euro; sur prix d'acquisition 512&thinsp;K&euro; HT &mdash; PV nette de frais +208&thinsp;K&euro; (MOIC net 1,41x)</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- PATRIMOINE                                       -->
+<!-- ═══════════════════════════════════════════════ -->
+<section id="patrimoine" style="background:var(--paper)">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-num">03</div>
+      <div class="section-meta">
+        <span class="section-eyebrow">Patrimoine actif · 2 SCI en exploitation</span>
+        <h2 class="section-title">Ce que je <em>gère aujourd'hui</em></h2>
+        <p class="section-desc">Deux SCI actives, sept sources de revenus contractualisées, zéro impayé depuis la création. Les loyers ci-dessous sont encaissés ou sécurisés par bail, pas des projections.</p>
+      </div>
+    </div>
+
+    <div class="pat-dashboard reveal">
+
+      <!-- Metrics hero -->
+      <div class="pat-hero-metrics">
+        <div class="pat-hero-metric">
+          <div class="phm-eyebrow">Loyers / an</div>
+          <div class="phm-val">398&thinsp;507&nbsp;€</div>
+          <div class="phm-desc">Consolidés sur 7 sources de revenus actives ou sécurisées par LOI/bail.</div>
+        </div>
+        <div class="pat-hero-metric">
+          <div class="phm-eyebrow">Valeur estimée</div>
+          <div class="phm-val">4,21&nbsp;M€</div>
+          <div class="phm-desc">Capitalisation des loyers actuels (base NOI courant) &mdash; estimation conservatrice. Potentiel d'upside &agrave; plein r&eacute;gime 2027.</div>
+        </div>
+        <div class="pat-hero-metric">
+          <div class="phm-eyebrow">Patrimoine net</div>
+          <div class="phm-val">3,57&nbsp;M€</div>
+          <div class="phm-desc">Valeur consolidée nette du CRD bancaire résiduel sur la SCI Reinaudo.</div>
+        </div>
+        <div class="pat-hero-metric">
+          <div class="phm-eyebrow">Historique impayés</div>
+          <div class="phm-val">0</div>
+          <div class="phm-desc">Aucun impayé constaté sur l'ensemble des baux gérés depuis 2012.</div>
+        </div>
+      </div>
+
+      <!-- 2 SCI cards -->
+      <div class="sci-grid">
+
+        <div class="sci-card">
+          <span class="sci-badge">SCI Reinaudo &middot; Le Pontet (84)</span>
+          <h3 class="sci-title">4 sources de revenus</h3>
+          <p class="sci-subtitle">Portefeuille diversifi&eacute; &middot; Loyers s&eacute;curis&eacute;s par bail ou LOI</p>
+
+          <div class="tenant-row">
+            <div class="tenant-info">
+              <span class="tenant-name">Chicken Street Avignon</span>
+              <span class="tenant-status">Bail commercial 9 ans · En place</span>
+            </div>
+            <div class="tenant-loyer">119&thinsp;444&nbsp;<em>€/an</em></div>
+          </div>
+          <div class="tenant-row">
+            <div class="tenant-info">
+              <span class="tenant-name">Enseigne bancaire nationale</span>
+              <span class="tenant-status">LOI signée · Livraison janvier 2027</span>
+            </div>
+            <div class="tenant-loyer">64&thinsp;800&nbsp;<em>€/an</em></div>
+          </div>
+          <div class="tenant-row">
+            <div class="tenant-info">
+              <span class="tenant-name">Food Trucks &times; 3</span>
+              <span class="tenant-status">1 en place · 2 après terrassement</span>
+            </div>
+            <div class="tenant-loyer">45&thinsp;000&nbsp;<em>€/an</em></div>
+          </div>
+          <div class="tenant-row">
+            <div class="tenant-info">
+              <span class="tenant-name">Écrans LED &mdash; Régie publicitaire</span>
+              <span class="tenant-status">Installés · En encaissement</span>
+            </div>
+            <div class="tenant-loyer">30&thinsp;000&nbsp;<em>€/an</em></div>
+          </div>
+
+          <div class="sci-note">Cr&eacute;dit bancaire en cours &middot; CRD r&eacute;siduel ~640&thinsp;K&euro; &middot; &eacute;ch&eacute;ance 2034</div>
+
+          <div class="sci-footer">
+            <span class="sci-footer-lbl">Plein régime 2027</span>
+            <span class="sci-footer-val">259&thinsp;244&nbsp;€/an</span>
+          </div>
+        </div>
+
+        <div class="sci-card">
+          <span class="sci-badge">SCI Le 1 &middot; Avignon Fontcouverte</span>
+          <h3 class="sci-title">3 locataires &middot; Cr&eacute;dit sold&eacute;</h3>
+          <p class="sci-subtitle">Op&eacute;ration autofinanc&eacute;e &middot; Portefeuille stable</p>
+
+          <div class="tenant-row">
+            <div class="tenant-info">
+              <span class="tenant-name">Würth France</span>
+              <span class="tenant-status">Distribution industrielle · Bail commercial</span>
+            </div>
+            <div class="tenant-loyer">54&thinsp;800&nbsp;<em>€/an</em></div>
+          </div>
+          <div class="tenant-row">
+            <div class="tenant-info">
+              <span class="tenant-name">Pare Brise Avignon</span>
+              <span class="tenant-status">Vitrage · Bail commercial</span>
+            </div>
+            <div class="tenant-loyer">36&thinsp;136&nbsp;<em>€/an</em></div>
+          </div>
+          <div class="tenant-row">
+            <div class="tenant-info">
+              <span class="tenant-name">Le Takadum</span>
+              <span class="tenant-status">Restauration · Bail commercial</span>
+            </div>
+            <div class="tenant-loyer">48&thinsp;325&nbsp;<em>€/an</em></div>
+          </div>
+
+          <div class="sci-note">830 m² utile &middot; Prix acte 640&thinsp;K&euro; (+ ~60&thinsp;K&euro; frais) &middot; Valeur estim&eacute;e 1&thinsp;638&thinsp;K&euro; &middot; PV latente +938&thinsp;K&euro;</div>
+
+          <div class="sci-footer">
+            <span class="sci-footer-lbl">Encaissé / an</span>
+            <span class="sci-footer-val">139&thinsp;262&nbsp;€/an</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Revenue visualisation -->
+      <div class="revenue-viz">
+        <h3 class="viz-title">Ventilation des revenus locatifs consolidés</h3>
+        <p class="viz-sub">Répartition en euros par an sur les deux SCI en exploitation &mdash; 398&thinsp;507&nbsp;€/an au total au plein régime 2027.</p>
+
+        <div class="viz-row">
+          <div class="viz-label">SCI Reinaudo &mdash; Chicken Street</div>
+          <div class="viz-bar-wrap"><div class="viz-bar reinaudo" data-width="100"></div></div>
+          <div class="viz-value">119&thinsp;444&nbsp;€</div>
+        </div>
+        <div class="viz-row">
+          <div class="viz-label">SCI Reinaudo &mdash; Bancaire (LOI)</div>
+          <div class="viz-bar-wrap"><div class="viz-bar reinaudo" data-width="54"></div></div>
+          <div class="viz-value">64&thinsp;800&nbsp;€</div>
+        </div>
+        <div class="viz-row">
+          <div class="viz-label">SCI Le 1 &mdash; Würth France</div>
+          <div class="viz-bar-wrap"><div class="viz-bar le1" data-width="46"></div></div>
+          <div class="viz-value">54&thinsp;800&nbsp;€</div>
+        </div>
+        <div class="viz-row">
+          <div class="viz-label">SCI Le 1 &mdash; Le Takadum</div>
+          <div class="viz-bar-wrap"><div class="viz-bar le1" data-width="40"></div></div>
+          <div class="viz-value">48&thinsp;325&nbsp;€</div>
+        </div>
+        <div class="viz-row">
+          <div class="viz-label">SCI Reinaudo &mdash; Food Trucks × 3</div>
+          <div class="viz-bar-wrap"><div class="viz-bar reinaudo" data-width="38"></div></div>
+          <div class="viz-value">45&thinsp;000&nbsp;€</div>
+        </div>
+        <div class="viz-row">
+          <div class="viz-label">SCI Le 1 &mdash; Pare Brise Avignon</div>
+          <div class="viz-bar-wrap"><div class="viz-bar le1" data-width="30"></div></div>
+          <div class="viz-value">36&thinsp;136&nbsp;€</div>
+        </div>
+        <div class="viz-row">
+          <div class="viz-label">SCI Reinaudo &mdash; Écrans LED</div>
+          <div class="viz-bar-wrap"><div class="viz-bar reinaudo" data-width="25"></div></div>
+          <div class="viz-value">30&thinsp;000&nbsp;€</div>
+        </div>
+      </div>
+
+      <!-- ──────────────────────────────────────── -->
+      <!-- PLAYBOOK TRANSFORMATION — SCI Reinaudo     -->
+      <!-- ──────────────────────────────────────── -->
+      <div class="playbook-block reveal">
+        <div class="playbook-head">
+          <span class="playbook-eyebrow">Playbook en action &middot; SCI Reinaudo &middot; Le Pontet</span>
+          <h3 class="playbook-title">De <em>un locataire</em> &agrave; <em>quatre sources de revenus</em></h3>
+          <p class="playbook-sub">Acquisition d'un actif avec un loyer initial de 60&thinsp;000&nbsp;&euro;/an HT HC. Quatre &eacute;tapes de cr&eacute;ation de valeur, chacune document&eacute;e par actes, baux ou autorisations administratives. M&ecirc;me m&eacute;thodologie, appliqu&eacute;e avec patience et pr&eacute;cision.</p>
+        </div>
+
+        <div class="playbook-steps">
+          <div class="playbook-step">
+            <div class="playbook-step-marker">01</div>
+            <div class="playbook-step-year">Acquisition</div>
+            <div class="playbook-step-title">Un locataire, un loyer classique</div>
+            <p class="playbook-step-desc">Acquisition de l'actif avec un locataire en place et un bail commercial &agrave; 60&thinsp;000&nbsp;&euro;/an HT HC. Rendement d'entr&eacute;e classique, conforme au march&eacute; local sur ce type d'actif.</p>
+            <span class="playbook-step-metric">1 source &middot; 60&thinsp;K&euro;/an</span>
+          </div>
+
+          <div class="playbook-step">
+            <div class="playbook-step-marker">02</div>
+            <div class="playbook-step-year">Restructuration</div>
+            <div class="playbook-step-title">Bail cass&eacute;, loyer r&eacute;align&eacute;</div>
+            <p class="playbook-step-desc">N&eacute;gociation active pour lib&eacute;rer l'actif, s&eacute;lection d'un nouveau locataire de meilleure qualit&eacute; (Chicken Street), r&eacute;alignement du loyer sur les valeurs locatives r&eacute;elles du march&eacute;. Ajout d'&eacute;crans LED en r&eacute;gie publicitaire propre gr&acirc;ce &agrave; la qualit&eacute; de l'emplacement.</p>
+            <span class="playbook-step-metric">2 sources &middot; 149&thinsp;K&euro;/an</span>
+          </div>
+
+          <div class="playbook-step">
+            <div class="playbook-step-marker">03</div>
+            <div class="playbook-step-year">Test &amp; permis</div>
+            <div class="playbook-step-title">Food truck validation + permis technique</div>
+            <p class="playbook-step-desc">Test d'un food truck sur l'emplacement : carton commercial. D&eacute;cision de construction d'un b&acirc;timent d&eacute;di&eacute; au-dessus du canal. <strong>Permis de construire obtenu</strong> malgr&eacute; une instruction complexe (construction sur ouvrage hydraulique). Financement bancaire obtenu. Capacit&eacute; prouv&eacute;e &agrave; ex&eacute;cuter sur dossiers administratifs difficiles.</p>
+            <span class="playbook-step-metric">3 sources &middot; 194&thinsp;K&euro;/an</span>
+          </div>
+
+          <div class="playbook-step">
+            <div class="playbook-step-marker">04</div>
+            <div class="playbook-step-year">R&eacute;gime plein</div>
+            <div class="playbook-step-title">LOI enseigne bancaire + livraison 2027</div>
+            <p class="playbook-step-desc">Travaux en cours, livraison fin 2026. <strong>LOI sign&eacute;e avec une enseigne bancaire nationale</strong> pour 64&thinsp;800&nbsp;&euro;/an. Food trucks additionnels planifi&eacute;s sur surfaces apr&egrave;s terrassement. L'actif d&eacute;ploie son plein potentiel commercial.</p>
+            <span class="playbook-step-metric">4 sources &middot; 259&thinsp;K&euro;/an</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ──────────────────────────────────────── -->
+      <!-- PLAYBOOK TRANSFORMATION — SCI Le 1         -->
+      <!-- ──────────────────────────────────────── -->
+      <div class="playbook-block reveal">
+        <div class="playbook-head">
+          <span class="playbook-eyebrow">Playbook en action &middot; SCI Le 1 &middot; Avignon Fontcouverte</span>
+          <h3 class="playbook-title">De <em>60&thinsp;K&euro;/an</em> &agrave; <em>139&thinsp;K&euro;/an</em> en trois &eacute;tapes</h3>
+          <p class="playbook-sub">Acquisition d'un b&acirc;timent de 830&nbsp;m&sup2; &agrave; 640&thinsp;000&nbsp;&euro; hors frais de notaire. Un locataire unique (W&uuml;rth) sur la surface totale, loyer initial 60&thinsp;000&nbsp;&euro;/an HT HC. Rendement d'entr&eacute;e ~8,6%. Transformation m&eacute;thodique par redivision et relocation.</p>
+        </div>
+
+        <div class="playbook-steps">
+          <div class="playbook-step">
+            <div class="playbook-step-marker">01</div>
+            <div class="playbook-step-year">Acquisition</div>
+            <div class="playbook-step-title">W&uuml;rth unique occupant</div>
+            <p class="playbook-step-desc">Acquisition du b&acirc;timent de 830&nbsp;m&sup2; &agrave; 640&thinsp;K&euro;. W&uuml;rth France (distribution industrielle) est locataire de la surface totale avec un bail commercial &agrave; 60&thinsp;000&nbsp;&euro;/an HT HC. Rendement d'entr&eacute;e classique.</p>
+            <span class="playbook-step-metric">Rdt ~8,6% &middot; 60&thinsp;K&euro;/an</span>
+          </div>
+
+          <div class="playbook-step">
+            <div class="playbook-step-marker">02</div>
+            <div class="playbook-step-year">N&eacute;gociation</div>
+            <div class="playbook-step-title">W&uuml;rth conserv&eacute; sur demi-surface</div>
+            <p class="playbook-step-desc">N&eacute;gociation directe avec W&uuml;rth : soit il lib&egrave;re l'actif, soit il accepte une r&eacute;duction de surface avec revalorisation de loyer. W&uuml;rth accepte de rester sur <strong>la moiti&eacute; du b&acirc;timent &agrave; 54&thinsp;800&nbsp;&euro;/an</strong> &mdash; loyer presque &eacute;quivalent sur deux fois moins de surface.</p>
+            <span class="playbook-step-metric">Surface lib&eacute;r&eacute;e &middot; +83% au m&sup2;</span>
+          </div>
+
+          <div class="playbook-step">
+            <div class="playbook-step-marker">03</div>
+            <div class="playbook-step-year">R&eacute;gime plein</div>
+            <div class="playbook-step-title">3 locataires en place</div>
+            <p class="playbook-step-desc">Apr&egrave;s travaux d'am&eacute;nagement et d&eacute;clarations administratives, relocation de la moiti&eacute; lib&eacute;r&eacute;e &agrave; <strong>Pare Brise Avignon</strong> (36&thinsp;136&nbsp;&euro;/an) et <strong>Le Takadum</strong> (48&thinsp;325&nbsp;&euro;/an). Trois baux commerciaux, z&eacute;ro impay&eacute;, portefeuille stable.</p>
+            <span class="playbook-step-metric">3 sources &middot; 139&thinsp;K&euro;/an</span>
+          </div>
+
+          <div class="playbook-step">
+            <div class="playbook-step-marker">04</div>
+            <div class="playbook-step-year">Aujourd'hui</div>
+            <div class="playbook-step-title">Actif d&eacute;cot&eacute; et ressource latente</div>
+            <p class="playbook-step-desc">Valeur estim&eacute;e de l'actif aujourd'hui : <strong>1,638&nbsp;M&euro;</strong> sur base du loyer actuel capitalis&eacute; au march&eacute;. Plus-value latente de <strong>+938&thinsp;K&euro;</strong> depuis l'acquisition. Rendement constat&eacute; &agrave; ce jour sup&eacute;rieur &agrave; 20% sur le prix d'acquisition initial.</p>
+            <span class="playbook-step-metric">Valeur 1,64&thinsp;M&euro; &middot; PV +938&thinsp;K&euro;</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- ENGAGEMENT — V2 : exposure + matrice + sortie      -->
+<!-- ═══════════════════════════════════════════════ -->
+<section id="engagement" style="background:var(--white)">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-num">04</div>
+      <div class="section-meta">
+        <span class="section-eyebrow">Engagement personnel · District One</span>
+        <h2 class="section-title">Alignement total,<br><em>au-delà du capital apporté</em></h2>
+        <p class="section-desc">L'engagement personnel ne se mesure pas à la seule mise de départ. Il combine l'exposition patrimoniale totale sur le bassin, le travail apporté sur la durée, les protections financières accordées à l'investisseur, et un partage de sortie transparent. Cette section détaille chacun de ces éléments.</p>
+      </div>
+    </div>
+
+    <!-- ──────────────────────────────────────── -->
+    <!-- BLOC EXPOSITION PATRIMONIALE TOTALE       -->
+    <!-- ──────────────────────────────────────── -->
+    <div class="exposure-block reveal">
+      <div class="exp-inner">
+        <div class="exp-left">
+          <div>
+            <div class="exp-eyebrow">Exposition patrimoniale consolid&eacute;e</div>
+            <h3 class="exp-headline">
+              100% de mon patrimoine<br>est engag&eacute; sur le <em>m&ecirc;me bassin</em>
+            </h3>
+            <div class="exp-amount">3,72&nbsp;M&euro;</div>
+          </div>
+          <p class="exp-text">L'engagement sur District One ne se limite pas &agrave; 150 K&euro;. Il s'ajoute &agrave; <strong>3,57 M&euro; de patrimoine immobilier d&eacute;j&agrave; expos&eacute;</strong> sur le bassin Grand Avignon, via les SCI Reinaudo et Le&nbsp;1. Si ce bassin se d&eacute;grade, l'ensemble de mon patrimoine immobilier est impact&eacute;. <strong>Cet alignement g&eacute;ographique total avec l'investisseur est ma garantie la plus forte.</strong> R&eacute;serve de pr&eacute;caution personnelle maintenue hors p&eacute;rim&egrave;tre immobilier (disponibilit&eacute;s bancaires et contrats d'assurance-vie) pour pr&eacute;server une capacit&eacute; d'action ind&eacute;pendante de l'op&eacute;ration.</p>
+        </div>
+
+        <div class="exp-breakdown">
+          <div class="exp-item">
+            <div class="exp-item-lbl">
+              <span class="exp-item-name">Capital social D1</span>
+              <span class="exp-item-sub">Apport nouveau &middot; Avril 2026</span>
+            </div>
+            <div class="exp-item-val">150&thinsp;K&euro;</div>
+          </div>
+          <div class="exp-item">
+            <div class="exp-item-lbl">
+              <span class="exp-item-name">SCI Reinaudo &mdash; Le Pontet</span>
+              <span class="exp-item-sub">Valeur nette du CRD &mdash; Patrimoine existant</span>
+            </div>
+            <div class="exp-item-val">1,93&thinsp;M&euro;</div>
+          </div>
+          <div class="exp-item">
+            <div class="exp-item-lbl">
+              <span class="exp-item-name">SCI Le&nbsp;1 &mdash; Avignon Fontcouverte</span>
+              <span class="exp-item-sub">Cr&eacute;dit sold&eacute; &mdash; Patrimoine existant</span>
+            </div>
+            <div class="exp-item-val">1,64&thinsp;M&euro;</div>
+          </div>
+          <div class="exp-total">
+            <span class="exp-total-lbl">Total exposition Grand Avignon</span>
+            <span class="exp-total-val">3,72&nbsp;M&euro;</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ──────────────────────────────────────── -->
+    <!-- MATRICE ENGAGEMENT — enrichie             -->
+    <!-- ──────────────────────────────────────── -->
+    <div class="eng-matrix reveal">
+      <div class="eng-header">
+        <div>
+          <h3 class="eng-side-title">Azel Belkadi <em>&mdash; Porteur</em></h3>
+          <p class="eng-side-desc">Capital · Exposition totale · Travail chiffré · Caution</p>
+        </div>
+        <div>
+          <h3 class="eng-side-title">Investisseur <em>&mdash; Financier</em></h3>
+          <p class="eng-side-desc">Capital · Quasi-fonds propres · Liquidation préférentielle</p>
+        </div>
+      </div>
+
+      <div class="eng-rows">
+
+        <div class="eng-row">
+          <div class="eng-row-lbl">Capital social D1</div>
+          <div class="eng-row-az"><strong>150&thinsp;000&nbsp;€</strong> &mdash; fonds propres personnels</div>
+          <div class="eng-row-inv">150&thinsp;000&nbsp;€ &mdash; 50% du capital</div>
+        </div>
+
+        <div class="eng-row">
+          <div class="eng-row-lbl">Exposition totale bassin</div>
+          <div class="eng-row-az"><strong>3,72&nbsp;M€</strong> (D1 + SCI Reinaudo + SCI Le&nbsp;1) &mdash; 100% du patrimoine net sur Grand Avignon</div>
+          <div class="eng-row-inv">Diversification possible sur d'autres actifs et zones</div>
+        </div>
+
+        <div class="eng-row">
+          <div class="eng-row-lbl">Obligations convertibles</div>
+          <div class="eng-row-az">&mdash;</div>
+          <div class="eng-row-inv"><strong>2&thinsp;400&thinsp;000&nbsp;€</strong> &mdash; 9% / an · maturité 7 ans</div>
+        </div>
+
+        <div class="eng-row">
+          <div class="eng-row-lbl">Comptes courants d'associé</div>
+          <div class="eng-row-az">&mdash;</div>
+          <div class="eng-row-inv"><strong>1&thinsp;674&thinsp;000&nbsp;€</strong> &mdash; 9% / an · bloqués 3 ans</div>
+        </div>
+
+        <div class="eng-row">
+          <div class="eng-row-lbl">Sweat equity chiffr&eacute;</div>
+          <div class="eng-row-az"><strong>~1&nbsp;M&euro; de valeur-travail apport&eacute;e</strong> sur 5 ans (200&nbsp;K&euro;/an, prix de march&eacute; d'un asset manager professionnel) &mdash; couvre l'origination du deal, la g&eacute;rance, la gestion op&eacute;rationnelle et les arbitrages. <em>Protection investisseur : m&eacute;canisme de reverse vesting pr&eacute;vu au pacte &mdash; en cas de d&eacute;part anticip&eacute; du porteur sans cause l&eacute;gitime avant An 5, r&eacute;&eacute;quilibrage du capital en faveur de l'investisseur au prorata des ann&eacute;es &eacute;coul&eacute;es.</em></div>
+          <div class="eng-row-inv">&mdash;</div>
+        </div>
+
+        <div class="eng-row">
+          <div class="eng-row-lbl">R&eacute;mun&eacute;ration g&eacute;rance</div>
+          <div class="eng-row-az"><strong>Z&eacute;ro An 1-3</strong>, puis r&eacute;mun&eacute;ration variable <strong>3 &agrave; 5% des loyers encaiss&eacute;s</strong> &agrave; partir de l'An 4, encadr&eacute;e par pacte d'associ&eacute;s</div>
+          <div class="eng-row-inv">Transparence totale &mdash; reporting trimestriel</div>
+        </div>
+
+        <div class="eng-row">
+          <div class="eng-row-lbl">Caution personnelle bancaire</div>
+          <div class="eng-row-az"><strong>Caution solidaire propos&eacute;e &agrave; 750&nbsp;K&euro;</strong> (~10% du pr&ecirc;t senior) &mdash; d&eacute;gressive sur l'amortissement du CRD, lib&eacute;r&eacute;e int&eacute;gralement &agrave; An 8. Modalit&eacute;s finales calibr&eacute;es dans le cadre du tour de table bancaire.</div>
+          <div class="eng-row-inv">Aucune caution personnelle</div>
+        </div>
+
+        <div class="eng-row">
+          <div class="eng-row-lbl">Gestion opérationnelle</div>
+          <div class="eng-row-az"><strong>Baux, travaux, arbitrages, suivi bancaire</strong> sur toute la durée &mdash; gérant unique</div>
+          <div class="eng-row-inv">Validation des décisions stratégiques en AG</div>
+        </div>
+
+        <div class="eng-row">
+          <div class="eng-row-lbl">Horizon de détention</div>
+          <div class="eng-row-az"><strong>10 ans &mdash; patrimonial long terme</strong>, pas de sortie anticipée recherchée</div>
+          <div class="eng-row-inv">Sortie An 4-5 (refi) ou An 7 (maturité OC) au choix</div>
+        </div>
+
+        <div class="eng-row">
+          <div class="eng-row-lbl">Ordre de remboursement</div>
+          <div class="eng-row-az">Capital remboursé <strong>en dernier</strong>, après la totalité de l'investisseur</div>
+          <div class="eng-row-inv"><strong>Liquidation préférentielle</strong> : CCA → OC → capital, avant tout partage</div>
+        </div>
+
+        <div class="eng-row">
+          <div class="eng-row-lbl">Distribution de dividendes</div>
+          <div class="eng-row-az">Bloquée tant que dette bancaire &gt; 4&thinsp;M€</div>
+          <div class="eng-row-inv">Coupons OC + CCA servis en priorité (9%/an)</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ──────────────────────────────────────── -->
+    <!-- TABLEAU DE SORTIE PAR SCENARIO            -->
+    <!-- ──────────────────────────────────────── -->
+    <div class="exit-block reveal">
+      <div class="exit-head">
+        <span class="exit-eyebrow">Sortie investisseur &middot; Refinancement An 4-5</span>
+        <h3 class="exit-title">Ce que <em>l'investisseur touche</em> &agrave; sa sortie</h3>
+        <p class="exit-sub">Apr&egrave;s les cessions partielles An 2-3 qui remboursent la dette bancaire initiale, la SCI refinance l'actif r&eacute;siduel en An 4-5. Ce refinancement permet le <strong>remboursement int&eacute;gral de l'investisseur</strong> : CCA + OC + int&eacute;r&ecirc;ts capitalis&eacute;s + capital social + prime de performance align&eacute;e sur la valorisation r&eacute;siduelle (m&eacute;canisme d&eacute;fini au pacte d'associ&eacute;s). Trois hypoth&egrave;ses de valorisation ci-dessous.</p>
+      </div>
+
+      <div class="exit-table">
+        <!-- Headers -->
+        <div class="exit-th main">Sc&eacute;nario de refinancement</div>
+        <div class="exit-th">Montant refinanc&eacute;</div>
+        <div class="exit-th">Investisseur re&ccedil;oit</div>
+        <div class="exit-th">TRI / MOIC</div>
+
+        <!-- Scenario 1 - Conservateur -->
+        <div class="exit-row-scenario" data-scenario-header="true">
+          <div class="exit-cell-primary">Conservateur</div>
+          <div class="exit-cell-sub">Actif r&eacute;siduel valoris&eacute; &agrave; 6,0&nbsp;M&euro; &middot; LTV 70%</div>
+        </div>
+        <div class="exit-row-scenario" data-label="Refinancement">
+          <div class="exit-cell-num">~4,2&thinsp;M&euro;</div>
+          <div class="exit-cell-moic">Nouvelle dette senior</div>
+        </div>
+        <div class="exit-row-scenario" data-label="Investisseur re&ccedil;oit">
+          <div class="exit-cell-num az">~4,2&thinsp;M&euro;</div>
+          <div class="exit-cell-moic">CCA + OC + capital, sans prime</div>
+        </div>
+        <div class="exit-row-scenario" data-label="Performance">
+          <div class="exit-cell-num">TRI ~9%</div>
+          <div class="exit-cell-moic">MOIC ~1,30x</div>
+        </div>
+
+        <!-- Scenario 2 - Central -->
+        <div class="exit-row-scenario central" data-scenario-header="true">
+          <div class="exit-cell-primary">Central</div>
+          <div class="exit-cell-sub">Actif r&eacute;siduel valoris&eacute; &agrave; 6,4&nbsp;M&euro; &middot; LTV 75%</div>
+        </div>
+        <div class="exit-row-scenario central" data-label="Refinancement">
+          <div class="exit-cell-num">~4,8&thinsp;M&euro;</div>
+          <div class="exit-cell-moic">Nouvelle dette senior</div>
+        </div>
+        <div class="exit-row-scenario central" data-label="Investisseur re&ccedil;oit">
+          <div class="exit-cell-num az">~4,8&thinsp;M&euro;</div>
+          <div class="exit-cell-moic">CCA + OC + capital + prime l&eacute;g&egrave;re</div>
+        </div>
+        <div class="exit-row-scenario central" data-label="Performance">
+          <div class="exit-cell-num">TRI ~10%</div>
+          <div class="exit-cell-moic">MOIC ~1,54x</div>
+        </div>
+
+        <!-- Scenario 3 - Optimiste -->
+        <div class="exit-row-scenario" data-scenario-header="true">
+          <div class="exit-cell-primary">Optimiste</div>
+          <div class="exit-cell-sub">Actif r&eacute;siduel valoris&eacute; &agrave; 7,5&nbsp;M&euro; &middot; LTV 75%</div>
+        </div>
+        <div class="exit-row-scenario" data-label="Refinancement">
+          <div class="exit-cell-num">~5,6&thinsp;M&euro;</div>
+          <div class="exit-cell-moic">Nouvelle dette senior</div>
+        </div>
+        <div class="exit-row-scenario" data-label="Investisseur re&ccedil;oit">
+          <div class="exit-cell-num az">~5,2&thinsp;M&euro;</div>
+          <div class="exit-cell-moic">CCA + OC + capital + prime renforc&eacute;e</div>
+        </div>
+        <div class="exit-row-scenario" data-label="Performance">
+          <div class="exit-cell-num">TRI ~12%</div>
+          <div class="exit-cell-moic">MOIC ~1,70x</div>
+        </div>
+      </div>
+
+      <p class="exit-footnote">Lecture : dans le sc&eacute;nario central, l'actif r&eacute;siduel est valoris&eacute; &agrave; 6,4&nbsp;M&euro; apr&egrave;s les cessions An 2-3, la SCI refinance &agrave; 75% LTV soit 4,8&nbsp;M&euro;. Cette ligne de cr&eacute;dit, combin&eacute;e aux exc&eacute;dents des cessions et &agrave; la tr&eacute;sorerie cumul&eacute;e, permet le remboursement int&eacute;gral de l'investisseur (CCA 1,674&nbsp;M&euro; + OC 2,4&nbsp;M&euro; + int&eacute;r&ecirc;ts capitalis&eacute;s + capital social 150&nbsp;K&euro; + prime de performance). <strong>TRI plancher de 9% garanti dans le sc&eacute;nario conservateur via le coupon fixe OC+CCA &agrave; 9%/an</strong>, ind&eacute;pendamment de la valorisation de sortie. <em>Positionnement core+ : coupon fixe garanti sur actif en exploitation, pas une op&eacute;ration de d&eacute;veloppement. DSCR entr&eacute;e 1,24x, actif &agrave; 71% d'occupation d&egrave;s closing.</em> L'investisseur sort int&eacute;gralement apr&egrave;s 4-5 ans. La SCI reste d&eacute;tenue par le porteur de projet, portant la nouvelle dette de refinancement sur l'actif r&eacute;siduel.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- POINTS DE VÉRIFICATION — Q&A                     -->
+<!-- ═══════════════════════════════════════════════ -->
+<section id="verification" style="background:var(--paper)">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-num">05</div>
+      <div class="section-meta">
+        <span class="section-eyebrow">Points de vérification · Transparence</span>
+        <h2 class="section-title">Les questions que <em>je préfère traiter</em><br>avant qu'elles ne soient posées</h2>
+        <p class="section-desc">Cinq questions légitimes qui reviennent systématiquement en comité crédit ou lors de la due diligence investisseur. Les réponses ci-dessous sont celles qui seront développées en réunion, pièces à l'appui.</p>
+      </div>
+    </div>
+
+    <div class="qa-grid reveal">
+
+      <div class="qa">
+        <div class="qa-q">Pourquoi une répartition 50/50 du capital alors que l'investisseur apporte 4,2&thinsp;M€ et moi 150&thinsp;K€ ?</div>
+        <div class="qa-a">Parce que la structure distingue le <strong>capital-trésorerie</strong> (financier) du <strong>capital-travail</strong> (sweat equity). Elle repose sur deux mécanismes contractuels : une <strong>liquidation préférentielle</strong> qui rembourse l'investisseur en priorité absolue (CCA + OC + capital) avant tout partage, et un <strong>waterfall de distribution</strong> qui verrouille l'ordre des flux. Le partage 50/50 ne s'applique qu'au résiduel après remboursement intégral de l'investisseur. C'est une structure standard des opérations de portage immobilier, détaillée dans le pacte d'associés rédigé par Sextant Avocats.</div>
+      </div>
+
+      <div class="qa">
+        <div class="qa-q">&Ecirc;tes-vous pr&ecirc;t &agrave; donner une caution personnelle&nbsp;?</div>
+        <div class="qa-a">Oui. Une caution solidaire est <strong>propos&eacute;e d'initiative &agrave; hauteur de 750&nbsp;K&euro;</strong> (soit environ 10% du pr&ecirc;t senior), pas attendue que la banque la demande. Elle est con&ccedil;ue comme d&eacute;gressive sur l'amortissement du CRD et <strong>lib&eacute;r&eacute;e int&eacute;gralement &agrave; An 8</strong>. Les modalit&eacute;s finales seront calibr&eacute;es dans le cadre du tour de table bancaire, en fonction de la structure retenue et des exigences du pr&ecirc;teur senior. L'intention est claire : mat&eacute;rialiser un engagement personnel tangible aux c&ocirc;t&eacute;s du pr&ecirc;teur, dans une logique d'alignement d'int&eacute;r&ecirc;ts.</div>
+      </div>
+
+      <div class="qa">
+        <div class="qa-q">Avez-vous le temps de g&eacute;rer District One en parall&egrave;le de vos autres activit&eacute;s&nbsp;?</div>
+        <div class="qa-a">Oui. Toutes mes activit&eacute;s se situent sur le m&ecirc;me bassin (Grand Avignon), dans un <strong>p&eacute;rim&egrave;tre de moins de 20&nbsp;km</strong>. Mon positionnement actuel de direction de projets entrepreneuriaux me permet d'avoir une pr&eacute;sence terrain quotidienne, une routine de gestion immobili&egrave;re, et un r&eacute;seau local activ&eacute; en continu. Je peux &eacute;tendre cette routine &agrave; District One sans surcharge op&eacute;rationnelle. <strong>La g&eacute;rance de la SCI n'est pas r&eacute;mun&eacute;r&eacute;e les trois premi&egrave;res ann&eacute;es</strong>, puis fait l'objet d'une r&eacute;mun&eacute;ration variable de 3 &agrave; 5% des loyers encaiss&eacute;s &agrave; partir de l'An 4, encadr&eacute;e par pacte d'associ&eacute;s. Le temps investi sur la p&eacute;riode critique de remboursement est donc purement patrimonial.</div>
+      </div>
+
+      <div class="qa">
+        <div class="qa-q">Quels sont vos impayés historiques ?</div>
+        <div class="qa-a"><strong>Aucun.</strong> Sur les baux commerciaux négociés et gérés depuis 2012 (BNP Paribas, SMC Société Générale, Würth France, Chicken Street, Pare Brise Avignon, Le Takadum, Food Trucks, Écrans LED), aucun impayé n'a été constaté. Les rappels sur échéances tardives ont toujours été traités en direct, sans mise en demeure ni contentieux. Relevés SCI disponibles sur demande.</div>
+      </div>
+
+      <div class="qa">
+        <div class="qa-q">Que se passe-t-il si le business plan de cessions An 2-3 ne se réalise pas&nbsp;?</div>
+        <div class="qa-a">Le scénario de base tient <strong>sans aucune cession</strong> : les loyers actuels (1,018&thinsp;M€/an) couvrent l'annuité bancaire (642&thinsp;K€/an) avec un DSCR de <strong>1,24x An&nbsp;1 et 1,44x An&nbsp;2</strong> &mdash; au-dessus du seuil bancaire de 1,10x. Les cessions optimisent la structure mais ne sont pas nécessaires à la solvabilité du dossier. Si les cessions tardent ou ne se font pas au prix prévu, l'investisseur perçoit ses coupons en cash à partir de l'An 3 sur la base du NOI courant, et la sortie est repoussée sur l'horizon An 7 (maturité OC). Voir scénarios de sensibilité dans le P3 &mdash; Modèle financier.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- PROFIL                                           -->
+<!-- ═══════════════════════════════════════════════ -->
+<section id="profil" style="background:var(--white)">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-num">06</div>
+      <div class="section-meta">
+        <span class="section-eyebrow">Profil · Positionnement</span>
+        <h2 class="section-title">Ce que je sais faire,<br><em>et ce que je ne prétends pas être</em></h2>
+      </div>
+    </div>
+
+    <div class="profil-grid reveal">
+      <div class="profil-text">
+        <p>Je travaille sur le marché immobilier tertiaire et commercial du Grand Avignon depuis 2012. J'ai appris à identifier des actifs avant que d'autres les regardent, à négocier des baux directement avec des enseignes nationales, et à gérer des locataires dans la durée &mdash; sans intermédiaire.</p>
+
+        <p>Je ne prétends pas avoir le parcours d'un institutionnel. Je n'ai pas de fonds derrière moi, pas de structure de gestion dédiée, pas d'équipe. Ce que j'ai, c'est <strong>14 ans de présence terrain continue</strong>, deux sorties notariées, et deux portefeuilles en exploitation qui génèrent des revenus réels chaque mois.</p>
+
+        <p>Sur District One, mon rôle est celui d'un <strong>gérant-opérateur</strong> : je suis présent, disponible, et directement impliqué. Je connais chaque locataire du site, j'ai analysé chaque lot, et j'engage mon propre capital dans l'opération. Ce n'est pas un dossier que j'ai monté pour d'autres &mdash; c'est un actif que je veux détenir à long terme.</p>
+
+        <p>Je suis entouré de conseils compétents &mdash; <strong>Sextant Avocats</strong> pour le juridique, un expert-comptable dédié pour la comptabilité SCI, un conseiller en financement professionnel pour le dossier bancaire. Je considère que savoir déléguer les aspects techniques à des experts est une force, pas une faiblesse. <strong>Un mandat de gestion de secours</strong> est pr&eacute;vu au pacte d'associ&eacute;s, activable via l'expert-comptable ou Sextant Avocats en cas d'indisponibilit&eacute; prolong&eacute;e du g&eacute;rant.</p>
+      </div>
+
+      <div>
+        <div class="profil-facts">
+          <div class="profil-facts-title">Repères factuels</div>
+          <div class="fact-row">
+            <span class="fact-lbl">Présence terrain</span>
+            <span class="fact-val">Grand Avignon · 2012</span>
+          </div>
+          <div class="fact-row">
+            <span class="fact-lbl">Cessions réalisées</span>
+            <span class="fact-val">2 &mdash; actes disponibles</span>
+          </div>
+          <div class="fact-row">
+            <span class="fact-lbl">Baux négociés</span>
+            <span class="fact-val">9 baux commerciaux</span>
+          </div>
+          <div class="fact-row">
+            <span class="fact-lbl">Enseignes gérées</span>
+            <span class="fact-val">BNP &middot; SMC &middot; W&uuml;rth &middot; Chicken Street &middot; Pare Brise Avignon &middot; Le Takadum</span>
+          </div>
+          <div class="fact-row">
+            <span class="fact-lbl">Impayés historiques</span>
+            <span class="fact-val">Aucun</span>
+          </div>
+          <div class="fact-row">
+            <span class="fact-lbl">Patrimoine net</span>
+            <span class="fact-val">3,57&nbsp;M€</span>
+          </div>
+          <div class="fact-row">
+            <span class="fact-lbl">Capital engagé D1</span>
+            <span class="fact-val">150&nbsp;000 €</span>
+          </div>
+          <div class="fact-row">
+            <span class="fact-lbl">Caution personnelle</span>
+            <span class="fact-val">Propos&eacute;e &middot; 750&nbsp;K&euro;</span>
+          </div>
+          <div class="fact-row">
+            <span class="fact-lbl">Horizon D1</span>
+            <span class="fact-val">10 ans · patrimonial</span>
+          </div>
+          <div class="fact-row">
+            <span class="fact-lbl">Conseil juridique</span>
+            <span class="fact-val">Sextant Avocats</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- CLOSING                                          -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="closing">
+  <div class="closing-container">
+    <div class="closing-eyebrow">Note personnelle &mdash; à l'attention du lecteur</div>
+    <p class="closing-quote">Ce dossier représente <em>l'opération la plus structurée</em> que j'aie jamais portée. Je suis conscient que c'est un changement d'échelle. Je l'aborde avec le même état d'esprit que toutes mes opérations passées : rigueur sur les chiffres, stabilité dans l'exécution, et patience dans la gestion. <em>Je ne cherche pas à impressionner &mdash; je cherche à rassurer sur la durée.</em></p>
+
+    <div class="closing-sig">
+      <div class="closing-sig-name">Azel Belkadi</div>
+      <div class="closing-sig-role">Porteur de projet · SCI District One</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- FOOTER                                           -->
+<!-- ═══════════════════════════════════════════════ -->
+<footer>
+  <div>
+    <p><span class="bold">Azel Belkadi</span> &mdash; Porteur de projet · SCI District One</p>
+    <p style="margin-top:4px">ZI de Fontvert · Chemin du Périgord · Le Pontet (84130) · Grand Avignon</p>
+  </div>
+  <p>Dossier Confidentiel &middot; Version 6.1 &middot; Avril 2026 &middot; Usage exclusif &eacute;tablissement bancaire &amp; conseil investisseur &middot; Reproduction interdite</p>
+</footer>
+
+<script>
+// Light progressive animation — content is visible by default even if JS fails
+try {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.1, rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+} catch(e) { /* content remains visible by default */ }
+
+// Nav scroll state
+try {
+  const nav = document.querySelector('nav');
+  if (nav) {
+    window.addEventListener('scroll', () => {
+      if(window.scrollY > 50){
+        nav.style.padding = '10px 40px';
+        nav.style.boxShadow = '0 1px 12px rgba(15,15,13,.05)';
+      } else {
+        nav.style.padding = '14px 40px';
+        nav.style.boxShadow = 'none';
+      }
+    });
+  }
+} catch(e) {}
+</script>
+
+</body>
+</html>
